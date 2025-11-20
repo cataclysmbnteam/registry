@@ -1,0 +1,23 @@
+schemaVersion: "1.0"
+id: arcana
+displayName: Arcana and Magic Items
+shortDescription: >-
+  Adds a host of craftable magic items and spells, centered around the use of
+  Arcana skill to research and exploit otherworldly monsters and anomalies.
+author:
+  - Chaosvolt
+license: ALL-RIGHTS-RESERVED
+homepage: "https://github.com/chaosvolt/cdda-arcana-mod/tree/master/Arcana_BN"
+version: 0.0.0
+source:
+  type: github_archive
+  url: "https://github.com/chaosvolt/cdda-arcana-mod/archive/refs/heads/master.zip"
+  commitSha: c844bca7bec22f0c240067a37407abc2b9d4c553
+  extractPath: cdda-arcana-mod-master/Arcana_BN
+categories:
+  - content
+dependencies:
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: master

@@ -1,0 +1,241 @@
+/* Override classless body padding for fixed nav */
+body {
+  padding-top: 4rem;
+}
+
+/* Nav styling */
+body > nav,
+header nav {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Mod Cards */
+.mod-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.mod-card {
+  padding: 0;
+  display: flex;
+  border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+
+.mod-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.mod-card-link {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  padding: 1rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.mod-card-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.mod-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.mod-card h3 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.1rem;
+}
+
+.mod-card .mod-meta {
+  font-size: 0.8rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.mod-card .mod-desc {
+  font-size: 0.85rem;
+  margin: 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mod-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 2px solid;
+}
+
+.mod-page .mod-meta {
+  padding: 1.5rem;
+  border-radius: 8px;
+  position: sticky;
+  top: 5rem;
+  height: fit-content;
+  border: 1px solid;
+}
+
+.mod-page .mod-meta dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.mod-page .mod-meta dt {
+  color: var(--cdark);
+  font-weight: normal;
+}
+
+.mod-page .mod-meta dd {
+  margin: 0;
+}
+
+/* Mod Content Section */
+.mod-content {
+  min-width: 0;
+}
+
+.mod-content h2 {
+  color: var(--cemph);
+  border-bottom: 1px solid;
+  padding-bottom: 0.5rem;
+}
+
+/* Category Filter */
+.category-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.category-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  border: 1px solid;
+  transition: border-color 0.2s, background 0.2s;
+  user-select: none;
+}
+
+.category-checkbox:hover {
+  border-color: var(--cemph);
+}
+
+.category-checkbox:has(input:checked) {
+  background: var(--cemphbg);
+  border-color: var(--cemph);
+}
+
+.category-checkbox input[type="checkbox"] {
+  accent-color: var(--cemph);
+  margin: 0;
+}
+
+.category-filters label {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  border: 1px solid;
+  transition: border-color 0.2s;
+}
+
+.category-filters label:hover {
+  border-color: var(--cemph);
+}
+
+.category-filters input[type="checkbox"] {
+  accent-color: var(--cemph);
+}
+
+.flex {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Hero Section for Index */
+.hero {
+  text-align: center;
+  padding: 2rem 0;
+  padding-top: 0;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid;
+}
+
+.hero h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  font-size: 1.2em;
+  color: var(--cdark);
+}
+
+/* Main Layout with Sidebar */
+.main-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.sidebar {
+  position: sticky;
+  top: 5rem;
+  padding: 1rem;
+  border: 1px solid;
+}
+
+.sidebar h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  color: var(--cemph);
+  border-bottom: 1px solid;
+  padding-bottom: 0.5rem;
+}
+
+.sidebar nav {
+  padding: 0;
+  margin: 0;
+}
+
+/* left align sidebar item */
+ul.category-list {
+  text-align: left;
+}
+
+.content {
+  min-width: 0;
+}
+
+/* Footer */
+body > footer {
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 4rem;
+  border-top: 1px solid;
+}

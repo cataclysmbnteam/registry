@@ -1,0 +1,17 @@
+# Manifest Ignore File
+
+# 
+
+# This file lists mods that should be ignored during auto-update.
+
+# Format: {repo url}/{mod id}
+
+# Lines starting with # are comments.
+
+https://github.com/cataclysmroguelikegallery/Cata-Rogall-Modpack/no_more_ugly_cbm
+
+# Example:
+
+# github.com/owner/repo/my_mod_id
+
+# github.com/otherowner/otherrepo/another_mod

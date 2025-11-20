@@ -1,0 +1,17 @@
+{
+  "fmt": { "semiColons": false },
+  "imports": {
+    "@octokit/rest": "npm:@octokit/rest@^22.0.1",
+    "@std/semver": "jsr:@std/semver@^1.0.7",
+    "deepsignal": "npm:deepsignal@^1.6.0",
+    "preact": "npm:preact@^10.28.0",
+    "preact/hooks": "npm:preact@^10.28.0/hooks",
+    "@preact/signals": "npm:@preact/signals@^2.5.1",
+    "@std/yaml": "jsr:@std/yaml@^1.0.10",
+    "valibot": "jsr:@valibot/valibot@^1.2.0"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
+  }
+}

@@ -1,0 +1,26 @@
+schemaVersion: "1.0"
+id: arcana_dinomod_patch
+displayName: Arcana/DinoMod Patchmod
+shortDescription: >-
+  Optional patch mod that allows content in Arcana and DinoMod to interact with
+  each other.
+author:
+  - Chaosvolt
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/chaosvolt/cdda-arcana-mod/tree/master/Patchmods/BN_Arcana_Dinomod_Patch
+version: 0.0.0
+source:
+  type: github_archive
+  url: "https://github.com/chaosvolt/cdda-arcana-mod/archive/refs/heads/master.zip"
+  commitSha: c844bca7bec22f0c240067a37407abc2b9d4c553
+  extractPath: cdda-arcana-mod-master/Patchmods/BN_Arcana_Dinomod_Patch
+categories:
+  - misc_additions
+dependencies:
+  bn: ">=0.9.1"
+  Arcana: "*"
+  DinoMod: "*"
+autoupdate:
+  type: commit
+  branch: master

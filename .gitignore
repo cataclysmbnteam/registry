@@ -1,0 +1,21 @@
+!site
+
+# Build outputs
+_site/
+_cache/
+.cache/
+
+# Environment
+.env
+
+# Generated files (can be regenerated)
+generated/mods.json
+generated/MODS.md
+generated/mods/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/

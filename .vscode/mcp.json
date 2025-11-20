@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "jsr-mcp": {
+      "command": "deno",
+      "args": [
+        "-A",
+        "https://raw.githubusercontent.com/sigmaSd/jsr-mcp/refs/heads/master/server.ts"
+      ]
+    }
+  }
+}

@@ -1,0 +1,36 @@
+schemaVersion: "1.0"
+
+# A mod extracted from a modpack (like Kenan's Modpack)
+id: example_modpack_mod
+displayName: "Example Modpack Mod"
+shortDescription: "A sample mod from a larger modpack, demonstrating extract_path usage."
+
+author: "Modpack Author & Contributors"
+license: "GPL-3.0-or-later"
+homepage: "https://github.com/modpack-author/BN-Modpack"
+
+version: "1.0.0"
+
+dependencies:
+  bn: ">=0.9.1"
+
+categories:
+  - content
+  - creatures
+
+tags:
+  - dinosaurs
+  - wildlife
+
+source:
+  type: github_archive
+  url: "https://github.com/modpack-author/BN-Modpack/archive/abc123def456.zip"
+  commitSha: "abc123def456"
+  # This is the key feature: extract only this subfolder from the archive
+  extractPath: "BN-Modpack-abc123def456/Mods/DinoMod"
+
+# Autoupdate configuration for commit-based updates (no tags)
+autoupdate:
+  type: commit
+  branch: main
+  url: "https://github.com/modpack-author/BN-Modpack/archive/$version.zip"

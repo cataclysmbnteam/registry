@@ -1,0 +1,21 @@
+schemaVersion: "1.0"
+id: jake_s_squirrel_mod
+displayName: "프로젝트: 다람쥐"
+shortDescription: 하이테크 모드.
+author:
+  - NakedJake
+license: ALL-RIGHTS-RESERVED
+homepage: "https://github.com/NobleJake/ProjectPackRat/tree/main/ProjectSquirrel"
+version: 0.0.0
+source:
+  type: github_archive
+  url: "https://github.com/NobleJake/ProjectPackRat/archive/refs/heads/main.zip"
+  commitSha: a8718444676e1fc191c7a4b9470fcdcbf23bbbf5
+  extractPath: ProjectPackRat-main/ProjectSquirrel
+categories:
+  - content
+dependencies:
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: main
