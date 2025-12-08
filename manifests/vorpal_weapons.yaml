@@ -1,0 +1,26 @@
+schema_version: "1.0"
+id: vorpal_weapons
+display_name: vorpal weapons
+short_description: >-
+  A collection of assorted gear, weapons, recipes and more. Machine translated
+  from Japanese.
+author:
+  - ''
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Vorpal_Weapons
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Vorpal_Weapons
+categories:
+  - items
+dependencies:
+  blazemod: "*"
+autoupdate:
+  type: commit
+  branch: master

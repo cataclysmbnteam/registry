@@ -1,0 +1,26 @@
+schema_version: "1.0"
+id: sierra_madre
+display_name: Sierra Madre
+short_description: >-
+  Adds the (in)famous villa and casino of the Sierra Madre which can be found
+  via an abandoned bunker from Fallout New Vegas: Dead Money.
+author:
+  - Stormtrooper
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/CDDA_Sierra_Madre_mod_bright_nights_version
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/CDDA_Sierra_Madre_mod_bright_nights_version
+categories:
+  - content
+dependencies:
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: master

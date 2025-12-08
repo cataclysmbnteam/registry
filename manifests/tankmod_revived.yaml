@@ -1,0 +1,23 @@
+schema_version: "1.0"
+id: tankmod_revived
+display_name: "Tankmod: Revived"
+short_description: "The intended successor of my older, obsoleted Tanks and Other Vehicles mod."
+author:
+  - Chaosvolt
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/chaosvolt/cdda-tankmod-revived-mod/tree/master/Tankmod_Revived_BN
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/chaosvolt/cdda-tankmod-revived-mod/archive/refs/heads/master.zip
+  commit_sha: ae4015995f7f619a35966b9a745209e91662971c
+  extract_path: Tankmod_Revived_BN
+categories:
+  - vehicles
+dependencies:
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: master

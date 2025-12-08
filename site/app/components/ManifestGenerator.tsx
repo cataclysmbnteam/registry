@@ -19,9 +19,16 @@ import {
   stripColorCodes,
   toManifestId,
 } from "../../../src/utils/github.ts"
-import { createOctokit, discoverMods, fetchRepoMetadata } from "../../../src/utils/github_fetch.ts"
-import { convertDependencies, parseModInfo } from "../../../src/schema/modinfo.ts"
-import type { ModManifest } from "./manifest-generator/types.ts"
+import {
+  createOctokit,
+  discoverMods,
+  fetchRepoMetadata,
+} from "../../../src/utils/github_fetch.ts"
+import {
+  convertDependencies,
+  parseModInfo,
+} from "../../../src/schema/modinfo.ts"
+import { storeToManifest } from "../../../src/schema/manifest.ts"
 import { store } from "./manifest-generator/store.ts"
 import { StatusMessages } from "./manifest-generator/StatusMessages.tsx"
 import { GitHubImport } from "./manifest-generator/GitHubImport.tsx"
@@ -33,48 +40,12 @@ import { SourceSection } from "./manifest-generator/SourceSection.tsx"
 import { CategoriesSection } from "./manifest-generator/CategoriesSection.tsx"
 import { AutoupdateSection } from "./manifest-generator/AutoupdateSection.tsx"
 import { ManifestOutput } from "./manifest-generator/ManifestOutput.tsx"
+import { stringifyManifest } from "../../../src/utils/stringify.ts"
 
-/** Generate manifest YAML from current store state */
+/** Generate manifest YAML from current store state using valibot schema */
 const getManifestYaml = (): string => {
-  const manifest: Partial<ModManifest> = {
-    schemaVersion: "1.0",
-    id: store.id || "my_mod",
-    displayName: store.displayName || "My Mod",
-    shortDescription: store.shortDescription ||
-      "A mod for Cataclysm: Bright Nights",
-    author: store.author,
-    license: store.license,
-    version: store.version || "0.0.0",
-    source: {
-      type: store.sourceType as ModManifest["source"]["type"],
-      url: store.sourceUrl ||
-        "https://github.com/owner/repo/archive/refs/heads/main.zip",
-    },
-  }
-
-  if (store.description) manifest.description = store.description
-  if (store.homepage) manifest.homepage = store.homepage
-  if (store.commitSha && manifest.source) {
-    manifest.source.commitSha = store.commitSha
-  }
-  if (store.extractPath && manifest.source) {
-    manifest.source.extractPath = store.extractPath
-  }
-  if (store.dependencies) {
-    manifest.dependencies = Object.fromEntries(store.dependencies)
-  }
-  if (store.categories.length > 0) manifest.categories = store.categories
-  if (store.tags) manifest.tags = store.tags
-  if (store.enableAutoupdate) {
-    manifest.autoupdate = {
-      type: store.autoupdateType as "tag" | "commit",
-    }
-    if (store.autoupdateType === "commit" && store.autoupdateBranch) {
-      manifest.autoupdate.branch = store.autoupdateBranch
-    }
-  }
-
-  return YAML.stringify(manifest, { quoteStyle: '"' })
+  const manifest = storeToManifest(store)
+  return stringifyManifest(manifest)
 }
 
 /** Copy manifest YAML to clipboard */
@@ -160,7 +131,8 @@ const handleFileUpload = (e: Event) => {
 const fetchFromGitHub = async () => {
   const parsed = parseGitHubUrl(store.githubUrl)
   if (!parsed) {
-    store.error = "Invalid GitHub URL. Expected format: https://github.com/owner/repo"
+    store.error =
+      "Invalid GitHub URL. Expected format: https://github.com/owner/repo"
     return
   }
 
@@ -208,7 +180,8 @@ const fetchFromGitHub = async () => {
     }
 
     store.foundMods = mods
-    store.success = `Found ${mods.length} mods. Select one to generate manifest.`
+    store.success =
+      `Found ${mods.length} mods. Select one to generate manifest.`
   } catch (err) {
     store.error = `Failed to fetch from GitHub: ${err}`
   } finally {
@@ -229,21 +202,23 @@ const selectMod = (index: number) => {
 }
 
 export const ManifestGenerator = () => (
-  <div>
+  <div class="manifest-generator">
     <StatusMessages />
-    <section class="flex">
-      <GitHubImport onFetch={fetchFromGitHub} onSelectMod={selectMod} />
-      <FileUpload onFileUpload={handleFileUpload} />
-    </section>
-    <div class="flex">
-      <article>
-        <IdentitySection />
-        <AttributionSection />
-        <VersionSection />
-        <SourceSection />
-        <CategoriesSection />
-        <AutoupdateSection />
-      </article>
+    <div class="generator-layout">
+      <div class="generator-form">
+        <div class="import-row">
+          <GitHubImport onFetch={fetchFromGitHub} onSelectMod={selectMod} />
+          <FileUpload onFileUpload={handleFileUpload} />
+        </div>
+        <div class="form-sections">
+          <IdentitySection />
+          <AttributionSection />
+          <VersionSection />
+          <SourceSection />
+          <CategoriesSection />
+          <AutoupdateSection />
+        </div>
+      </div>
       <ManifestOutput
         manifestYaml={getManifestYaml()}
         copied={store.copied}

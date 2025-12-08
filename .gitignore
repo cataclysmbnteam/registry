@@ -13,6 +13,9 @@ generated/mods.json
 generated/MODS.md
 generated/mods/
 
+# Playwright MCP screenshots
+.playwright-mcp/
+
 # OS
 .DS_Store
 Thumbs.db

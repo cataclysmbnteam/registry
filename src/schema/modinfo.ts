@@ -63,6 +63,7 @@ export const ModInfo = v.object({
   authors: v.optional(
     v.array(v.string(), "Author(s) of the mod"),
   ),
+  license: v.optional(License),
   description: v.optional(
     v.string("Longer description shown in mod details"),
   ),
@@ -95,7 +96,7 @@ export const getModId = (modinfo: ModInfo): string => modinfo.id
  * Used to filter and extract MOD_INFO entries before validation.
  */
 const RawModInfoEntry = v.looseObject({
-  type: v.optional(v.string()),
+  type: v.literal("MOD_INFO"),
 })
 
 /**
@@ -111,17 +112,17 @@ export const parseModInfo = (content: string): ModInfo[] => {
 
   // Filter to MOD_INFO entries and validate each against the schema
   return entries
-    .filter((item): item is Record<string, unknown> =>
-      typeof item === "object" &&
-      item !== null &&
-      v.safeParse(RawModInfoEntry, item).success &&
-      (item as Record<string, unknown>).type === "MOD_INFO"
-    )
-    .filter((item) => v.safeParse(ModInfo, item).success)
+    .filter((item) => v.safeParse(RawModInfoEntry, item).success)
+    .flatMap((item) => {
+      const res = v.safeParse(ModInfo, item)
+      if (res.success) return [res.output]
+      console.log(v.summarize(res.issues))
+      return []
+    })
     .map((item) => item as ModInfo)
 }
 
-import type { Dependencies } from "./manifest.ts"
+import { type Dependencies, License } from "./manifest.ts"
 
 /** Default version constraint for bn (Bright Nights base game) */
 const BN_DEFAULT_VERSION = ">=0.9.1"

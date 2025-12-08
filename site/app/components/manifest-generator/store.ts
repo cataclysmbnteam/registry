@@ -26,8 +26,10 @@ export interface StoreState {
   extractPath: string
   categories: string[]
   tags: string[]
+  iconUrl: string
   autoupdateType: string
   autoupdateBranch: string
+  autoupdateRegex: string
   enableAutoupdate: boolean
 
   // UI state
@@ -61,8 +63,10 @@ export const store = deepSignal<StoreState>({
   extractPath: "",
   categories: [],
   tags: [],
+  iconUrl: "",
   autoupdateType: "commit",
   autoupdateBranch: "main",
+  autoupdateRegex: "",
   enableAutoupdate: true,
 
   // UI state defaults

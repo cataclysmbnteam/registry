@@ -14,47 +14,44 @@ export const GitHubImport = ({
   onFetch,
   onSelectMod,
 }: GitHubImportProps) => (
-  <section>
+  <section class="form-section import-section">
     <h3>Import from GitHub</h3>
-    <fieldset>
+    <div class="form-group">
       <label>GitHub Repository URL</label>
-      <input
-        type="text"
-        placeholder="https://github.com/owner/repo"
-        value={store.githubUrl}
-        onInput={(e) => (store.githubUrl = e.currentTarget.value)}
-      />
-      <button
-        type="button"
-        onClick={onFetch}
-        disabled={store.isLoading}
-      >
-        {store.isLoading ? "Loading..." : "Fetch Mods"}
-      </button>
-    </fieldset>
+      <div class="input-with-button">
+        <input
+          type="text"
+          placeholder="https://github.com/owner/repo"
+          value={store.githubUrl}
+          onInput={(e) => (store.githubUrl = e.currentTarget.value)}
+        />
+        <button
+          type="button"
+          class="button is-primary"
+          onClick={onFetch}
+          disabled={store.isLoading}
+        >
+          {store.isLoading ? "Loading..." : "Fetch"}
+        </button>
+      </div>
+    </div>
     {store.rateLimit && (
-      <p>
+      <p class="rate-limit-info">
         GitHub API: {store.rateLimit.remaining} requests remaining (resets{" "}
         {store.rateLimit.reset.toLocaleTimeString()})
       </p>
     )}
 
     {store.foundMods.length > 0 && (
-      <div style={{ marginTop: "1rem" }}>
-        <label
-          style={{ fontWeight: 600, marginBottom: "0.5rem", display: "block" }}
-        >
+      <div class="found-mods">
+        <label class="found-mods-label">
           Select a mod ({store.foundMods.length} found):
         </label>
-        <ul>
+        <ul class="mod-list">
           {store.foundMods.map((mod, i) => (
             <li
               key={i}
-              style={{
-                cursor: "pointer",
-                padding: "0.5rem",
-                backgroundColor: store.selectedModIndex === i ? "#e0e0e0" : "transparent",
-              }}
+              class={`mod-list-item ${store.selectedModIndex === i ? "selected" : ""}`}
               onClick={() => onSelectMod(i)}
             >
               <strong class="mod-name">

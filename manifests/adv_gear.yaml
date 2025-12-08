@@ -1,0 +1,26 @@
+schema_version: "1.0"
+id: adv_gear
+display_name: Advanced Gear
+short_description: >-
+  Extremely high-end items mod based around nanotech crafting and 3D printing,
+  with basic materials that can be found in labs, mutations to be added later.
+author:
+  - Shard
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/AdvancedGear_CDDA_Mod
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/AdvancedGear_CDDA_Mod
+categories:
+  - items
+dependencies:
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: master

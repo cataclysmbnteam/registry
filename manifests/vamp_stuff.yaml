@@ -1,0 +1,27 @@
+schema_version: "1.0"
+id: vamp_stuff
+display_name: Vampiric Stuff
+short_description: |-
+  Adds night creatures, new items, monsters and locations.
+  More on interactions with npcs and quests, providing a subtle RPG playstyle.
+
+  Note that
+author:
+  - Axema Vales
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/vamp_stuff
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/vamp_stuff
+categories:
+  - magical
+dependencies:
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: master

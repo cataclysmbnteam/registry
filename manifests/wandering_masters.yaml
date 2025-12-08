@@ -1,0 +1,28 @@
+schema_version: "1.0"
+id: wandering_masters
+display_name: Wandering Masters
+short_description: >-
+  Mod adds 'Wandering Masters', NPCs that can 'teach' player martial arts after
+  completing their quest line.
+
+  Check mod folder for more information.
+author:
+  - El-Jekozo
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Wandering_Masters-bright-nights
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Wandering_Masters-bright-nights
+categories:
+  - misc_additions
+dependencies:
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: master

@@ -6,9 +6,9 @@
 import { store } from "./store.ts"
 
 export const IdentitySection = () => (
-  <section>
+  <section class="form-section">
     <h3>Identity</h3>
-    <fieldset>
+    <div class="form-group">
       <label>ID *</label>
       <input
         type="text"
@@ -17,8 +17,8 @@ export const IdentitySection = () => (
         onInput={(e) => (store.id = e.currentTarget.value)}
       />
       <small>Lowercase alphanumeric with underscores</small>
-    </fieldset>
-    <fieldset>
+    </div>
+    <div class="form-group">
       <label>Display Name *</label>
       <input
         type="text"
@@ -26,8 +26,8 @@ export const IdentitySection = () => (
         value={store.displayName}
         onInput={(e) => (store.displayName = e.currentTarget.value)}
       />
-    </fieldset>
-    <fieldset>
+    </div>
+    <div class="form-group">
       <label>Short Description *</label>
       <input
         type="text"
@@ -37,14 +37,14 @@ export const IdentitySection = () => (
         onInput={(e) => (store.shortDescription = e.currentTarget.value)}
       />
       <small>{store.shortDescription.length}/200 characters</small>
-    </fieldset>
-    <fieldset>
+    </div>
+    <div class="form-group">
       <label>Full Description</label>
       <textarea
         placeholder="Detailed description..."
         value={store.description}
         onInput={(e) => (store.description = e.currentTarget.value)}
       />
-    </fieldset>
+    </div>
   </section>
 )

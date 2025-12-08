@@ -1,5 +1,6 @@
 import { ModManifest } from "../../mod.ts"
-import { colorCodesToHtml, stripColorCodes } from "../../src/utils/color.ts"
+import { stripColorCodes } from "../../src/utils/color.ts"
+import { ModCard } from "../_includes/ModCard.tsx"
 
 export const layout = "base.tsx"
 export const title = "All Mods"
@@ -10,22 +11,64 @@ interface ModPageData {
   manifest: ModManifest
 }
 
-/** Default placeholder for mods without icons */
-const PLACEHOLDER_ICON = "/assets/mod-placeholder.svg"
+/** Group mods by parent, with the parent mod and its submods */
+interface ModGroup {
+  main: ModPageData
+  submods: ModPageData[]
+}
+
+/**
+ * Group mods by their `parent` field.
+ * Parent mods appear as the main card, submods are grouped under them.
+ */
+const groupModsByParent = (mods: ModPageData[]): ModGroup[] => {
+  // Create a map of mod ID -> page data for easy lookup
+  const modMap = new Map<string, ModPageData>()
+  for (const mod of mods) {
+    modMap.set(mod.manifest.id.toLowerCase(), mod)
+  }
+
+  // Group submods by their parent
+  const submodsByParent = new Map<string, ModPageData[]>()
+  const parentMods: ModPageData[] = []
+
+  for (const mod of mods) {
+    if (mod.manifest.parent) {
+      const parentId = mod.manifest.parent.toLowerCase()
+      const submods = submodsByParent.get(parentId) ?? []
+      submods.push(mod)
+      submodsByParent.set(parentId, submods)
+    } else {
+      parentMods.push(mod)
+    }
+  }
+
+  // Build groups: parent mods with their submods
+  const groups: ModGroup[] = []
+
+  for (const mod of parentMods) {
+    const modId = mod.manifest.id.toLowerCase()
+    const submods = submodsByParent.get(modId) ?? []
+    groups.push({ main: mod, submods })
+  }
+
+  // Sort groups by main mod title
+  return groups.sort((a, b) =>
+    stripColorCodes(a.main.title).localeCompare(stripColorCodes(b.main.title))
+  )
+}
 
 export default ({ search }: Lume.Data) => {
   const mods = search.pages("mod") as ModPageData[]
-  // Sort by plain title (without color codes)
-  const sortedMods = [...mods].sort((a, b) =>
-    stripColorCodes(a.title).localeCompare(stripColorCodes(b.title))
-  )
+  const groups = groupModsByParent(mods)
+  const totalMods = mods.length
 
   return (
     <>
       <h1>All Mods</h1>
-      <p>Browse all {sortedMods.length} mods in the registry.</p>
+      <p>Browse all {totalMods} mods in the registry.</p>
 
-      {sortedMods.length === 0
+      {groups.length === 0
         ? (
           <p>
             No mods found. <a href="/docs/submit/">Submit the first one!</a>
@@ -33,31 +76,15 @@ export default ({ search }: Lume.Data) => {
         )
         : (
           <div class="mod-grid">
-            {sortedMods.map(({ url, title, manifest }) => (
-              <div class="mod-card" key={manifest.id}>
-                <a href={url} class="mod-card-link">
-                  <img
-                    src={manifest?.iconUrl ?? PLACEHOLDER_ICON}
-                    alt={`${stripColorCodes(title)} icon`}
-                    class="mod-card-icon"
-                    width="80"
-                    height="80"
-                    loading="lazy"
-                  />
-                  <div class="mod-card-content">
-                    <h3 dangerouslySetInnerHTML={{ __html: colorCodesToHtml(title) }} />
-                    <p class="mod-meta">
-                      v{manifest.version} · {manifest.author}
-                    </p>
-                    <p
-                      class="mod-desc"
-                      dangerouslySetInnerHTML={{
-                        __html: colorCodesToHtml(manifest.shortDescription),
-                      }}
-                    />
-                  </div>
-                </a>
-              </div>
+            {groups.map((group) => (
+              <ModCard
+                key={group.main.manifest.id}
+                url={group.main.url}
+                title={group.main.title}
+                manifest={group.main.manifest}
+                showCategories
+                submodCount={group.submods.length}
+              />
             ))}
           </div>
         )}

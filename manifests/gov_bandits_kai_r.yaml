@@ -1,0 +1,27 @@
+schema_version: "1.0"
+id: gov_bandits_kai_r
+display_name: Add Bandits Extended+
+short_description: >-
+  Modified by Malkeus, Further modified with new custom content by Jolmar7 with
+  lots of new added things. Adds bands of non-NPCs type of hostile and friendly
+  armed humans that carry weapons, ammo, that
+author:
+  - "GovTD/Karl_Keimov, Jolmar7"
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/M_Agents_Expanded
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/M_Agents_Expanded
+categories:
+  - content
+dependencies:
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: master

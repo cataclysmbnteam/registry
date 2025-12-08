@@ -1,0 +1,26 @@
+schema_version: "1.0"
+id: advtech
+display_name: Advanced Technologies
+short_description: >-
+  Adds advanced craftable vehicle parts, mech parts to craft vehicle mechs,
+  craftable blob cyborgs, some new robots, some new armors, weapons and
+  crafting.
+author:
+  - Kane
+  - MechMaster2.0
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Advanced_Technologies
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Advanced_Technologies
+categories:
+  - items
+autoupdate:
+  type: commit
+  branch: master

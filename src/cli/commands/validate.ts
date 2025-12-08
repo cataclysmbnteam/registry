@@ -6,15 +6,21 @@ import { Command } from "@cliffy/command"
 import * as YAML from "@std/yaml"
 import { walk } from "@std/fs"
 import { checkManifest } from "../../utils/validator.ts"
+import { stringifyManifest } from "../../utils/stringify.ts"
 
 interface FileResult {
   file: string
   valid: boolean
   errors: number
+  written: boolean
 }
 
-/** Check a single manifest file */
-const checkManifestFile = async (filePath: string, quiet: boolean): Promise<FileResult> => {
+/** Check a single manifest file, optionally writing sorted YAML */
+const checkManifestFile = async (
+  filePath: string,
+  quiet: boolean,
+  write: boolean,
+): Promise<FileResult> => {
   const content = await Deno.readTextFile(filePath)
   const manifest = YAML.parse(content)
 
@@ -23,10 +29,23 @@ const checkManifestFile = async (filePath: string, quiet: boolean): Promise<File
     console.log(result.output)
   }
 
+  let written = false
+  if (write && result.valid) {
+    const sortedYaml = stringifyManifest(manifest)
+    if (sortedYaml !== content) {
+      await Deno.writeTextFile(filePath, sortedYaml)
+      written = true
+      if (!quiet) {
+        console.log(`  ↻ Reformatted (keys sorted)`)
+      }
+    }
+  }
+
   return {
     file: filePath,
     valid: result.valid,
     errors: result.errorCount,
+    written,
   }
 }
 
@@ -34,11 +53,13 @@ const checkManifestFile = async (filePath: string, quiet: boolean): Promise<File
 const checkAllManifests = async (
   manifestDir: string,
   quiet: boolean,
-): Promise<{ total: number; valid: number; errors: number; skipped: number }> => {
+  write: boolean,
+): Promise<{ total: number; valid: number; errors: number; skipped: number; written: number }> => {
   let total = 0
   let valid = 0
   let errors = 0
   let skipped = 0
+  let written = 0
 
   for await (
     const entry of walk(manifestDir, {
@@ -54,9 +75,10 @@ const checkAllManifests = async (
     }
 
     try {
-      const result = await checkManifestFile(entry.path, quiet)
+      const result = await checkManifestFile(entry.path, quiet, write)
       total++
       if (result.valid) valid++
+      if (result.written) written++
       errors += result.errors
     } catch (error) {
       console.error(`Error processing ${entry.path}: ${error}`)
@@ -65,7 +87,7 @@ const checkAllManifests = async (
     }
   }
 
-  return { total, valid, errors, skipped }
+  return { total, valid, errors, skipped, written }
 }
 
 /** Check command for manifest validity */
@@ -73,15 +95,17 @@ export const validateCommand = new Command()
   .description("Check manifest files for structural and content validity")
   .arguments("[target:string]")
   .option("-q, --quiet", "Only show summary, not individual file results")
+  .option("-w, --write", "Reformat valid manifests with sorted keys")
   .action(async (options, target = "manifests") => {
     try {
       const stat = await Deno.stat(target)
+      const write = options.write ?? false
 
       if (stat.isDirectory) {
         if (!options.quiet) {
           console.log(`Checking manifests in ${target}/\n`)
         }
-        const result = await checkAllManifests(target, options.quiet ?? false)
+        const result = await checkAllManifests(target, options.quiet ?? false, write)
 
         console.log(`\nSummary:`)
         console.log(`  Total: ${result.total}`)
@@ -90,12 +114,15 @@ export const validateCommand = new Command()
         if (result.skipped > 0) {
           console.log(`  Skipped: ${result.skipped} (example files)`)
         }
+        if (write && result.written > 0) {
+          console.log(`  Reformatted: ${result.written}`)
+        }
 
         if (result.errors > 0) {
           Deno.exit(1)
         }
       } else {
-        const result = await checkManifestFile(target, options.quiet ?? false)
+        const result = await checkManifestFile(target, options.quiet ?? false, write)
         if (!result.valid) {
           Deno.exit(1)
         }

@@ -6,9 +6,9 @@
 import { store } from "./store.ts"
 
 export const SourceSection = () => (
-  <section>
+  <section class="form-section">
     <h3>Source</h3>
-    <fieldset>
+    <div class="form-group">
       <label>Source Type</label>
       <select
         value={store.sourceType}
@@ -18,8 +18,8 @@ export const SourceSection = () => (
         <option value="gitlab_archive">GitLab Archive</option>
         <option value="direct_url">Direct URL</option>
       </select>
-    </fieldset>
-    <fieldset>
+    </div>
+    <div class="form-group">
       <label>Source URL *</label>
       <input
         type="url"
@@ -27,8 +27,8 @@ export const SourceSection = () => (
         value={store.sourceUrl}
         onInput={(e) => (store.sourceUrl = e.currentTarget.value)}
       />
-    </fieldset>
-    <fieldset>
+    </div>
+    <div class="form-group">
       <label>Commit SHA</label>
       <input
         type="text"
@@ -36,8 +36,8 @@ export const SourceSection = () => (
         value={store.commitSha}
         onInput={(e) => (store.commitSha = e.currentTarget.value)}
       />
-    </fieldset>
-    <fieldset>
+    </div>
+    <div class="form-group">
       <label>Extract Path (for modpacks)</label>
       <input
         type="text"
@@ -45,9 +45,7 @@ export const SourceSection = () => (
         value={store.extractPath}
         onInput={(e) => (store.extractPath = e.currentTarget.value)}
       />
-      <small>
-        Path inside the archive where the mod is located
-      </small>
-    </fieldset>
+      <small>Path inside the archive where the mod is located</small>
+    </div>
   </section>
 )

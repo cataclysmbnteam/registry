@@ -1,0 +1,27 @@
+schema_version: "1.0"
+id: zets_hair_ext_more_locations
+display_name: Zet's Hair - More Locations
+short_description: >-
+  Adds hairs, eyes and skin for the mod More Locations, used with
+  DeadPeopleTileset
+author:
+  - Zetsukaze
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Zets-Hair_More_Locations_KenanEdition
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Zets-Hair_More_Locations_KenanEdition
+categories:
+  - graphical
+dependencies:
+  zets_hair_extensions_undead: "*"
+  more_locations: "*"
+autoupdate:
+  type: commit
+  branch: master

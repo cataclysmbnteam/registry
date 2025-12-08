@@ -1,0 +1,27 @@
+schema_version: "1.0"
+id: bootleg_walkers
+display_name: Bootleg Walkers
+short_description: >-
+  Allows one to construct shoddy knock-offs of the Northrup ATSV chicken
+  walker.  For more information, consult the README.md file.
+author:
+  - Feasts Upon Stars/Aggregate
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Bootleg_Walkers
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Bootleg_Walkers
+categories:
+  - items
+dependencies:
+  bn: ">=0.9.1"
+  modular_turrets_no_blacklist: "*"
+autoupdate:
+  type: commit
+  branch: master

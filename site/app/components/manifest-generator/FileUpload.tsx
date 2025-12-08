@@ -8,8 +8,10 @@ interface FileUploadProps {
 }
 
 export const FileUpload = ({ onFileUpload }: FileUploadProps) => (
-  <section>
+  <section class="form-section import-section">
     <h3>Or Upload modinfo.json</h3>
-    <input type="file" accept=".json" onChange={onFileUpload} />
+    <div class="form-group">
+      <input type="file" accept=".json" onChange={onFileUpload} />
+    </div>
   </section>
 )

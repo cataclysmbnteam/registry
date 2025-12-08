@@ -1,0 +1,28 @@
+schema_version: "1.0"
+id: tekitoumap
+display_name: Tekitou Map Commercial Overhaul
+short_description: >-
+  Tekitou map Rezone's Commercial Zones? Adds a few distant urban locations
+  along with new variants of existing city locations
+author:
+  - Unknown
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/Medium-Maintenance-Small-Mods/Tekitoumap
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/Medium-Maintenance-Small-Mods/Tekitoumap
+categories:
+  - misc_additions
+dependencies:
+  bn: ">=0.9.1"
+  MST_Extra: "*"
+  makeshift: "*"
+autoupdate:
+  type: commit
+  branch: master

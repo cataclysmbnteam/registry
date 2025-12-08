@@ -6,34 +6,35 @@
   - **if all subtasks are ticked, erase task checkbox section and update [coding standards](#coding-standards) accordingly**
 - If stuck on issue, first check AGENTS.md for updates from user.
 
-## TASKS
-
-- [x] registry mod version must follow semver.
-  - [x] when creating registry from modinfo.json, wrong values should be replaced with default values
-    - Already implemented: `v.parse(v.fallback(SemVer, "0.0.0"), mod.modinfo.version)` in fetch.ts
-- [ ] migrate web form logic to https://modularforms.dev/preact/guides/introduction
-  - [ ] remove getManifestYaml and just directly use valibot schema with defaults
-- [x] use idiomatic signals, that is, value/setValue is forbidden; just import global store signal and use it
-  - Created store.ts with global deepsignal store
-  - Child components import store directly instead of props
-  - No more useDeepSignal or prop drilling
-- [x] implement search using https://lume.land/plugins/pagefind/
-  - [ ] make search bar only search for mods, not whole site.
-  - [ ] make search bar in docs/ only search docs.
-- [ ] using playwright MCP, forever iterate to make it look better but still use semantic HTML.
-  - [ ] deduplicate mod card logic
-
 ## Coding Standards
 
 - **IGNORE BACKWARDS COMPATABILITY, THIS IS A GREENFIELD PROJECT.**
+- **PARSE, DON'T VALIDATE.** DO NOT EVER CREATE `validate*` FUNCTIONS. JUST USE VALIBOT SCHEMA
+- make sure code is sharable between CLI and site.
 - use Deno+typescript.
 - for typescript, use dependencies and prefer `@std/{name}` modules.
 - create tests and run `deno fmt` and `deno lint --fix` on typescript changes.
 - use https://github.com/lumeland/lume for static site generation.
-  https://endless-sky.github.io/plugins.html
 - use https://valibot.dev for schema generation and validation.
 - follow https://docs.deno.com/runtime/contributing/style_guide/, except use arrow functions for all functions, and prefer FP.
 - **ALWAYS USE VALIBOT FOR PARSING AND VALIDATING UNKNOWN DATA**
+- **NEVER, EVER CREATE POINTLESS WRAPPER FUNCTIONS**
+- Use `@lumeland/ds` design system for styling (CSS variables: `--color-*`, `--font-*`, etc.)
+- Use single shared schema definitions with `v.fallback()` for defaults - no duplicating field definitions
+- Use playwright MCP for style-related tasks
+- DO NOT run `deno task serve`, wait for user to run web server on `:3000`
+
+## TASKS
+
+- [ ] mobile hamburger menu icon looks hideous, animates hideous, remove animation completely
+- [ ] on nav, replace mods.json with API section with link to:
+  - [ ] mods.json
+  - [ ] mods.md (rename generated/MODS.md)
+  - [ ] openapi spec page (a single GET /mods endpoint returning all mods), generate using e.g https://github.com/open-circle/valibot/tree/main/packages/to-json-schema and/or https://github.com/swagger-api/swagger-ui
+- [ ] generate `generated/mods/{mod_id}.json` files for each yml manifest
+- [ ] confirm that autoupdate works correctly
+  - [ ] refer to https://github.com/endless-sky/rfcs/blob/main/rfcs/0001-plugin-index.md
+  - [ ] write an E2E test
 
 ## Tech Stack
 

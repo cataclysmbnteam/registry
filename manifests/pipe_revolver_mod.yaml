@@ -1,0 +1,25 @@
+schema_version: "1.0"
+id: pipe_revolver_mod
+display_name: Pipe Revolver Rifles
+short_description: Adds revolver-style uppgraded versions of pipe rifles.
+author:
+  - Maddremor
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/Medium-Maintenance-Small-Mods/pipe-revolver-rifles
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/Medium-Maintenance-Small-Mods/pipe-revolver-rifles
+categories:
+  - items
+dependencies:
+  bn: ">=0.9.1"
+  craftgp: "*"
+autoupdate:
+  type: commit
+  branch: master

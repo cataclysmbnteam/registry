@@ -7,24 +7,25 @@ import { store } from "./store.ts"
 
 export const StatusMessages = () => (
   <>
-    {store.error && <div>{store.error}</div>}
-    {store.success && <div>{store.success}</div>}
+    {store.error && <div class="status-error">{store.error}</div>}
+    {store.success && <div class="status-success">{store.success}</div>}
     {store.isLoading && (
-      <div>
+      <div class="status-loading">
         ⏳ {store.loadingMessage}
         {store.progress.total > 0 && (
-          <div>
-            <div>
+          <>
+            <div class="progress-bar">
               <div
+                class="progress-fill"
                 style={{
                   width: `${(store.progress.current / store.progress.total) * 100}%`,
                 }}
               />
             </div>
-            <div>
+            <div class="progress-text">
               {store.progress.current}/{store.progress.total} files • {store.progress.step}
             </div>
-          </div>
+          </>
         )}
       </div>
     )}

@@ -1,0 +1,28 @@
+schema_version: "1.0"
+id: modern_weapon
+display_name: Modern Weapon Pack Expanded
+short_description: >-
+  This mod adds more real world firearms to the game. It was derived from Modern
+  Weapons Pack by crom. It also overrides most of core game guns to use more
+  calibers. INCLUDES PATCH OPTION in modern_extr
+author:
+  - crom
+  - BorkBorkGoesTheCode
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Modern_Weapons_Pack_Expanded
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Modern_Weapons_Pack_Expanded
+categories:
+  - items
+dependencies:
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: master

@@ -1,0 +1,28 @@
+schema_version: "1.0"
+id: aaa
+display_name: Adurnsyl's Assorted Arms and Armour
+short_description: >-
+  This addon adds more real-world military equipment into the game. Blacklist
+  removed due to Malkeus' Greed.
+author:
+  - Adurnsyl
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/aaa
+  NO blacklist
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/aaa NO
+    blacklist
+categories:
+  - items
+dependencies:
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: master

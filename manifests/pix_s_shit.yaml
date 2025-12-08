@@ -1,0 +1,24 @@
+schema_version: "1.0"
+id: pix_s_shit
+display_name: Pixel's Various Fuckery
+short_description: >-
+  Adds additional unique post-threshold mutations, various recipes for weapons.
+  Slightly risqué but safe for work, no worse than vibrators and gimp suits!@#
+author:
+  - pixel and Eirenex
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/Medium-Maintenance-Small-Mods/pixels_fuckery
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/Medium-Maintenance-Small-Mods/pixels_fuckery
+categories:
+  - items
+autoupdate:
+  type: commit
+  branch: master

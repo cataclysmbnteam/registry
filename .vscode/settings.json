@@ -1,5 +1,9 @@
 {
   "[typescript][typescriptreact][css][markdown]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
+  },
+  "search.exclude": {
+    "manifests": true,
+    "generated": true
   }
 }

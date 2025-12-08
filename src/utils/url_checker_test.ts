@@ -21,7 +21,7 @@ Deno.test("extractManifestUrls - extracts icon URL", () => {
     source: {
       url: "https://example.com/mod.zip",
     },
-    iconUrl: "https://example.com/icon.png",
+    icon_url: "https://example.com/icon.png",
   }
 
   const urls = extractManifestUrls(manifest)

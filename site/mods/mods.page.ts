@@ -41,13 +41,35 @@ const loadManifests = async (): Promise<ModManifest[]> => {
   return manifests
 }
 
+/** Find parent mod if this mod has one */
+const findParentMod = (
+  manifest: ModManifest,
+  allManifests: ModManifest[],
+): ModManifest | undefined => {
+  if (!manifest.parent) return undefined
+  const parentId = manifest.parent.toLowerCase()
+  return allManifests.find((m) => m.id.toLowerCase() === parentId)
+}
+
+/** Find submods (children) for this mod */
+const findSubmods = (
+  manifest: ModManifest,
+  allManifests: ModManifest[],
+): ModManifest[] => {
+  const modId = manifest.id.toLowerCase()
+  return allManifests.filter((m) => m.parent?.toLowerCase() === modId)
+}
+
 export default async function* () {
   const manifests = await loadManifests()
 
   yield* manifests.map((manifest) => ({
     url: `/mods/${manifest.id}/`,
-    title: manifest.displayName,
+    title: manifest.display_name,
     tags: ["mod"],
     manifest,
+    parentMod: findParentMod(manifest, manifests),
+    submods: findSubmods(manifest, manifests),
+    allManifests: manifests, // Pass all manifests for dependency resolution
   }))
 }
