@@ -1,0 +1,26 @@
+schema_version: "1.0"
+id: zhigh_mod
+display_name: Zombie Highschool Mod
+short_description: >-
+  Add a weird school which includes quests, killing zombies, adding weapons, and
+  moar, still WIP.
+author:
+  - Another Marius
+license: CC-BY-SA-4.0
+version: 0.0.0
+source:
+  type: github_archive
+  url: "https://github.com/thhoney08/ZombieHighMod/archive/refs/heads/main.zip"
+  commit_sha: bf47b1fa4b426280b3498a42a18cc02ec0ddb0bb
+  extract_path: ZombieHighMod-main/Zhigh_mod
+description: >-
+  Add a weird school which includes quests, killing zombies, adding weapons, and
+  moar, still WIP.
+homepage: "https://github.com/thhoney08/ZombieHighMod/tree/main/Zhigh_mod"
+dependencies:
+  bn: ">=0.9.1"
+  exotic_ammo: "*"
+tags: []
+autoupdate:
+  type: commit
+  branch: main
