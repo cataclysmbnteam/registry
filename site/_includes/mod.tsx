@@ -1,37 +1,45 @@
 import { ModManifest } from "../../mod.ts"
 import { colorCodesToHtml, stripColorCodes } from "../../src/utils/color.ts"
+import { ModCard, PLACEHOLDER_ICON } from "./ModCard.tsx"
 
 export const layout = "base.tsx"
-
-interface ModData {
-  id: string
-  version: string
-  author: string
-  license: string
-  categories?: string[]
-  iconUrl?: string
-}
 
 interface PageData {
   title: string
   manifest: ModManifest
+  parentMod?: ModManifest
+  submods?: ModManifest[]
+  allManifests?: ModManifest[]
   children?: Lume.Data["children"]
 }
 
-/** Default placeholder for mods without icons */
-const PLACEHOLDER_ICON = "/assets/mod-placeholder.svg"
+/** Check if a mod ID exists in the registry */
+const findModInRegistry = (modId: string, allManifests?: ModManifest[]): ModManifest | undefined =>
+  allManifests?.find((m) =>
+    m.id.toLowerCase() === modId.toLowerCase() ||
+    m.display_name.toLowerCase() === modId.toLowerCase()
+  )
 
-export default ({ manifest }: PageData, _helpers: Lume.Helpers) => (
+export default (
+  { manifest, parentMod, submods = [], allManifests = [] }: PageData,
+  _helpers: Lume.Helpers,
+) => (
   <article class="mod-page">
     <header>
       <img
-        src={manifest?.iconUrl ?? PLACEHOLDER_ICON}
-        alt={`${stripColorCodes(manifest.displayName)} icon`}
+        src={manifest?.icon_url ?? PLACEHOLDER_ICON}
+        alt={`${stripColorCodes(manifest.display_name)} icon`}
         class="mod-icon"
         width="160"
         height="160"
       />
-      <h1 dangerouslySetInnerHTML={{ __html: colorCodesToHtml(manifest.displayName) }} />
+      {manifest.homepage
+        ? (
+          <a href={manifest.homepage} target="_blank" rel="noopener noreferrer">
+            <h1 dangerouslySetInnerHTML={{ __html: colorCodesToHtml(manifest.display_name) }} />
+          </a>
+        )
+        : <h1 dangerouslySetInnerHTML={{ __html: colorCodesToHtml(manifest.display_name) }} />}
     </header>
 
     <aside>
@@ -48,7 +56,11 @@ export default ({ manifest }: PageData, _helpers: Lume.Helpers) => (
         {manifest.categories && manifest.categories.length > 0 && (
           <>
             <dt>Categories</dt>
-            <dd>{manifest.categories.join(", ")}</dd>
+            <dd class="mod-categories">
+              {manifest.categories.map((category) => (
+                <span class="badge" key={category}>{category}</span>
+              ))}
+            </dd>
           </>
         )}
       </dl>
@@ -64,7 +76,7 @@ export default ({ manifest }: PageData, _helpers: Lume.Helpers) => (
       <h2>Description</h2>
       <div
         dangerouslySetInnerHTML={{
-          __html: colorCodesToHtml(manifest.description || manifest.shortDescription),
+          __html: colorCodesToHtml(manifest.description || manifest.short_description),
         }}
       />
 
@@ -73,14 +85,14 @@ export default ({ manifest }: PageData, _helpers: Lume.Helpers) => (
         Download:{" "}
         <a href={manifest.source.url}>
           <span
-            dangerouslySetInnerHTML={{ __html: colorCodesToHtml(manifest.displayName) }}
+            dangerouslySetInnerHTML={{ __html: colorCodesToHtml(manifest.display_name) }}
           />{" "}
           v{manifest.version}
         </a>
       </p>
-      {manifest.source.extractPath && (
+      {manifest.source.extract_path && (
         <p>
-          <strong>Note:</strong> Extract the <code>{manifest.source.extractPath}</code>{" "}
+          <strong>Note:</strong> Extract the <code>{manifest.source.extract_path}</code>{" "}
           folder from the archive.
         </p>
       )}
@@ -88,27 +100,81 @@ export default ({ manifest }: PageData, _helpers: Lume.Helpers) => (
       <h2>Compatibility</h2>
       <ul>
         <li>
-          <strong>Dependencies:</strong> {formatDeps(manifest.dependencies)}
+          <strong>Dependencies:</strong>{" "}
+          <DepList deps={manifest.dependencies} allManifests={allManifests} />
         </li>
         <li>
-          <strong>Conflicts:</strong> {formatDeps(manifest.conflicts)}
+          <strong>Conflicts:</strong>{" "}
+          <DepList deps={manifest.conflicts} allManifests={allManifests} />
         </li>
       </ul>
 
-      {manifest.tags && (
+      {manifest.tags && manifest.tags.length > 0 && (
         <>
           <h2>Tags</h2>
-          <p>{manifest.tags.join(", ")}</p>
+          <div class="mod-categories">
+            {manifest.tags.map((tag) => <span class="badge" key={tag}>{tag}</span>)}
+          </div>
+        </>
+      )}
+
+      {parentMod && (
+        <>
+          <h2>Parent Mod</h2>
+          <div class="mod-grid related-mods">
+            <ModCard
+              key={parentMod.id}
+              url={`/mods/${parentMod.id}/`}
+              title={parentMod.display_name}
+              manifest={parentMod}
+            />
+          </div>
+        </>
+      )}
+
+      {submods.length > 0 && (
+        <>
+          <h2>Submods</h2>
+          <div class="mod-grid related-mods">
+            {submods.map((submod) => (
+              <ModCard
+                key={submod.id}
+                url={`/mods/${submod.id}/`}
+                title={submod.display_name}
+                manifest={submod}
+              />
+            ))}
+          </div>
         </>
       )}
     </section>
   </article>
 )
 
-const formatDeps = (deps?: Record<string, string>) =>
-  Object.entries(deps ?? {}).map(([modId, version]) => (
-    <div key={modId} class="flex">
-      <span>{modId}</span>
-      <span>{version}</span>
-    </div>
-  ))
+/** Render dependencies/conflicts as clickable links when they exist in registry */
+const DepList = (
+  { deps, allManifests }: { deps?: Record<string, string>; allManifests: ModManifest[] },
+) => {
+  const entries = Object.entries(deps ?? {})
+  if (entries.length === 0) return <span>None</span>
+
+  return (
+    <>
+      {entries.map(([modId, version], i) => {
+        const foundMod = findModInRegistry(modId, allManifests)
+        return (
+          <span key={modId}>
+            {foundMod
+              ? (
+                <a href={`/mods/${foundMod.id}/`} class="dep-link">
+                  {modId}
+                </a>
+              )
+              : <span>{modId}</span>} <span class="version-constraint">{version}</span>
+            {i < entries.length - 1 && ", "}
+          </span>
+        )
+      })}
+    </>
+  )
+}

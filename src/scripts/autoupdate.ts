@@ -72,7 +72,7 @@ export const getLatestVersion = (
   const autoupdate = manifest.autoupdate
   if (!autoupdate) return Promise.resolve(null)
 
-  const updateUrl = autoupdate.updateUrl ?? manifest.homepage ??
+  const updateUrl = autoupdate.update_url ?? manifest.homepage ??
     extractRepoUrl(manifest)
   if (!updateUrl) return Promise.resolve(null)
 
@@ -231,12 +231,13 @@ export const applyVersionUpdate = (
 ): ModManifest => {
   const updated = { ...manifest }
   updated.version = newVersion
+  updated.last_updated = new Date().toISOString()
 
   if (manifest.autoupdate) {
     // Apply substitution keys
     for (const [key, value] of Object.entries(manifest.autoupdate)) {
       if (
-        ["type", "updateUrl", "branch", "regex"].includes(key) ||
+        ["type", "update_url", "branch", "regex"].includes(key) ||
         typeof value !== "string"
       ) {
         continue
@@ -247,10 +248,10 @@ export const applyVersionUpdate = (
       // Handle nested keys like source.url
       if (key === "url" && updated.source) {
         updated.source = { ...updated.source, url: substituted }
-      } else if (key === "iconUrl") {
-        updated.iconUrl = substituted
-      } else if (key === "commitSha" && updated.source) {
-        updated.source = { ...updated.source, commitSha: substituted }
+      } else if (key === "icon_url") {
+        updated.icon_url = substituted
+      } else if (key === "commit_sha" && updated.source) {
+        updated.source = { ...updated.source, commit_sha: substituted }
       }
     }
   }
@@ -294,7 +295,7 @@ export const updateManifestFile = async (
 
     // Verify URLs are valid before saving
     const urlsToCheck = [updated.source.url]
-    if (updated.iconUrl) urlsToCheck.push(updated.iconUrl)
+    if (updated.icon_url) urlsToCheck.push(updated.icon_url)
 
     for (const url of urlsToCheck) {
       const result = await checkUrl(url)

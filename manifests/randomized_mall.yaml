@@ -1,0 +1,26 @@
+schema_version: "1.0"
+id: randomized_mall
+display_name: Randomized Mall
+short_description: >-
+  Replaces the existing mall with one having a randomized layout.  Less
+  realistic looking but more variety.
+author:
+  - Sunshine
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/Medium-Maintenance-Small-Mods/Randomized_Mall
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/Medium-Maintenance-Small-Mods/Randomized_Mall
+categories:
+  - buildings
+dependencies:
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: master

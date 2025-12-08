@@ -1,0 +1,24 @@
+schema_version: "1.0"
+id: ships
+display_name: Ships From Oa Additional Buildings
+short_description: Just a load of ship here
+author:
+  - Oa
+  - Nonesuch
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Ships
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Ships
+categories:
+  - buildings
+dependencies:
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: master

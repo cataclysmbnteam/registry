@@ -111,7 +111,7 @@ export function checkUrls(
  */
 export function extractManifestUrls(manifest: {
   source?: { url?: string }
-  iconUrl?: string
+  icon_url?: string
   homepage?: string
 }): string[] {
   const urls: string[] = []
@@ -119,8 +119,8 @@ export function extractManifestUrls(manifest: {
   if (manifest.source?.url) {
     urls.push(manifest.source.url)
   }
-  if (manifest.iconUrl) {
-    urls.push(manifest.iconUrl)
+  if (manifest.icon_url) {
+    urls.push(manifest.icon_url)
   }
   // Homepage is informational, not critical
   // if (manifest.homepage) urls.push(manifest.homepage)

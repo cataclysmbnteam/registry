@@ -1,0 +1,26 @@
+schema_version: "1.0"
+id: zets_hair_extensions_undead
+display_name: Zetsukaze's Hair - 0.E EDIT
+short_description: >-
+  Adds hairs, eyes and skins for UnDeadPeopleTileset. Modified for Undead People
+  tileset compatibility.
+author:
+  - Zetsukaze
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Zets-Hair_Extensions_Undead
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Zets-Hair_Extensions_Undead
+categories:
+  - graphical
+dependencies:
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: master

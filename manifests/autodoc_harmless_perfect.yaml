@@ -1,0 +1,26 @@
+schema_version: "1.0"
+id: autodoc_harmless_perfect
+display_name: Autodoc Harmless and Perfect
+short_description: >-
+  The surgeries that are performed with the Autodoc are now perfect and
+  absolutely harmless with no risks involved at all.
+author:
+  - Mrsecretguy1/Kenan
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Autodoc_Harmless_Perfect
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Autodoc_Harmless_Perfect
+categories:
+  - rebalance
+dependencies:
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: master

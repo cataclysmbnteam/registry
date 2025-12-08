@@ -1,0 +1,22 @@
+schema_version: "1.0"
+id: nm_wpns
+display_name: Nimian Manufacture Guns
+short_description: "Adds a new set of guns, light and accurate, as well as some other toys."
+author:
+  - ...
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Nimian_Manufacture
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Nimian_Manufacture
+categories:
+  - items
+autoupdate:
+  type: commit
+  branch: master

@@ -12,15 +12,15 @@ interface ManifestOutputProps {
 export const ManifestOutput = (
   { manifestYaml, copied, onCopy }: ManifestOutputProps,
 ) => (
-  <article>
-    <div>
+  <aside class="manifest-output">
+    <div class="output-header">
       <h3>Generated Manifest</h3>
-      <button type="button" onClick={onCopy}>
-        {copied ? "Copied!" : "Copy to Clipboard"}
+      <button type="button" class="button is-secondary" onClick={onCopy}>
+        {copied ? "✓ Copied!" : "Copy"}
       </button>
     </div>
-    <pre>
-      <code>{manifestYaml}</code>
+    <pre class="language-yaml">
+      <code class="language-yaml">{manifestYaml}</code>
     </pre>
-  </article>
+  </aside>
 )

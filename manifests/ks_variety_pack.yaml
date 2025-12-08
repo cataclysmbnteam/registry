@@ -1,0 +1,27 @@
+schema_version: "1.0"
+id: ks_variety_pack
+display_name: CDDA Variety Pack
+short_description: >-
+  Adds vehicle variants (extended cab / bed pickups, for example), and some QoL
+  fixes so you can drink during winter. Also adds some character creation
+  options regarding gender, sexuality.
+author:
+  - KS
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/Medium-Maintenance-Small-Mods/cdda_variety_pack
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/Medium-Maintenance-Small-Mods/cdda_variety_pack
+categories:
+  - misc_additions
+dependencies:
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: master

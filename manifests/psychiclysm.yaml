@@ -1,0 +1,27 @@
+schema_version: "1.0"
+id: psychiclysm
+display_name: Psychiclysm
+short_description: >-
+  Adapts some Magiclysm features for psychic phenomena.  Changes nether monsters
+  fear attacks to an incremental effect.  Gives many monsters psi-attacks.  Adds
+  mesmerism options to NPC dialog.  Psychic
+author:
+  - Sunshine
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Psychiclysm
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Psychiclysm
+categories:
+  - content
+dependencies:
+  bn: ">=0.9.1"
+  mutant_npcs: "*"
+autoupdate:
+  type: commit
+  branch: master

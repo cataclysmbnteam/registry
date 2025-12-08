@@ -121,12 +121,10 @@ export const discoverMods = async (
         path: file.path,
         ref: branch,
       })
-
       if (!("content" in contentData) || !contentData.content) continue
 
       const decoded = decodeBase64Utf8(contentData.content)
       const modinfos = parseModInfo(decoded)
-
       for (const modinfo of modinfos) {
         if (!modinfo.id) continue
         mods.push({

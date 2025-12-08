@@ -1,0 +1,26 @@
+schema_version: "1.0"
+id: vermilionmod
+display_name: The Vermilion Mod
+short_description: >-
+  Adds a random assortment of over-the-top weapons, gear and risqué items for
+  the depraved.
+author:
+  - Vermilion
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Vermilion_Mod
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Vermilion_Mod
+categories:
+  - items
+dependencies:
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: master

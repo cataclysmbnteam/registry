@@ -9,7 +9,6 @@ export {
   type AutoupdateConfig,
   type AutoupdateType,
   createManifest,
-  isValidManifestId,
   type ModManifest,
   type ModSource,
   type SourceType,

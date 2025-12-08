@@ -1,0 +1,27 @@
+schema_version: "1.0"
+id: vamp_stuff_arcana
+display_name: Vampiric Stuff + Arcana Mod Extension
+short_description: Links Vampiric Stuff and Arcana for various new contents and features.
+author:
+  - Axema Vales
+  - Chaosvolt
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/vamp_stuff_arcana
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/vamp_stuff_arcana
+categories:
+  - magical
+dependencies:
+  vamp_stuff: "*"
+  Arcana: "*"
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: master

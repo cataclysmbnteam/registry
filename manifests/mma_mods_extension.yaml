@@ -1,0 +1,33 @@
+schema_version: "1.0"
+id: mma_mods_extension
+display_name: Mythical Martial Arts - Mods Extension
+short_description: >-
+  Adds MMA martial arts support for weapons from various mods NOTE, you MUST
+  have the mods below enabled, otherwise it will throw a NEGLIGIBLE (ignorable)
+  error
+
+
+  <color_light_gr
+author:
+  - Photoloss
+  - Psychodata
+  - Caring-Goat-Deity
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/MMA_Mods_Extension
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/MMA_Mods_Extension
+categories:
+  - misc_additions
+dependencies:
+  bn: ">=0.9.1"
+  MMA: "*"
+autoupdate:
+  type: commit
+  branch: master

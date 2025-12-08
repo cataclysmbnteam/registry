@@ -1,5 +1,6 @@
 import { ModManifest } from "../mod.ts"
-import { colorCodesToHtml, stripColorCodes } from "../src/utils/color.ts"
+import { stripColorCodes } from "../src/utils/color.ts"
+import { ModCard } from "./_includes/ModCard.tsx"
 
 export const layout = "base.tsx"
 export const title = "Home"
@@ -10,32 +11,20 @@ interface ModPageData {
   manifest: ModManifest
 }
 
-/** Default placeholder for mods without icons */
-const PLACEHOLDER_ICON = "/assets/mod-placeholder.svg"
-
-/**
- * Mod categories from CDDA/BN modinfo.json schema
- */
-// const MOD_CATEGORIES = [
-//   { value: "total_conversion", label: "Total Conversion" },
-//   { value: "content", label: "Content" },
-//   { value: "items", label: "Items" },
-//   { value: "creatures", label: "Creatures" },
-//   { value: "misc_additions", label: "Misc Additions" },
-//   { value: "buildings", label: "Buildings" },
-//   { value: "vehicles", label: "Vehicles" },
-//   { value: "rebalance", label: "Rebalance" },
-//   { value: "magical", label: "Magical" },
-//   { value: "item_exclude", label: "Item Exclude" },
-//   { value: "monster_exclude", label: "Monster Exclude" },
-//   { value: "graphical", label: "Graphical" },
-// ]
-
 export default ({ search }: Lume.Data) => {
-  // Get all mods and show the first 6 (sorted alphabetically by plain title)
+  // Get all mods and show the 6 most recently updated
   const mods = search.pages("mod") as ModPageData[]
   const recentMods = [...mods]
-    .sort((a, b) => stripColorCodes(a.title).localeCompare(stripColorCodes(b.title)))
+    .sort((a, b) => {
+      // Sort by last_updated descending (newest first)
+      const dateA = a.manifest.last_updated ?? ""
+      const dateB = b.manifest.last_updated ?? ""
+      // Mods without last_updated go to the end
+      if (!dateA && !dateB) return stripColorCodes(a.title).localeCompare(stripColorCodes(b.title))
+      if (!dateA) return 1
+      if (!dateB) return -1
+      return dateB.localeCompare(dateA)
+    })
     .slice(0, 6)
 
   return (
@@ -44,67 +33,19 @@ export default ({ search }: Lume.Data) => {
         <h1>Cataclysm: Bright Nights Mod Registry</h1>
       </header>
 
-      {/* <div class="main-layout"> */}
-      {
-        /* <aside class="sidebar" id="category-sidebar">
-          <nav>
-            <h2>Categories</h2>
-            <form id="category-filters">
-              <ul class="category-list">
-                {MOD_CATEGORIES.map((cat) => (
-                  <li key={cat.value}>
-                    <label>
-                      <input
-                        type="checkbox"
-                        name="category"
-                        value={cat.value}
-                        data-category={cat.value}
-                      />{" "}
-                      {cat.label}
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </form>
-          </nav>
-        </aside> */
-      }
-
       <main class="content">
         {recentMods.length > 0 && (
           <section id="featured-section">
-            <h2>Featured Mods</h2>
+            <h2>Recently Updated Mods</h2>
             <div class="mod-grid">
-              {recentMods.map(({ url, title, manifest }) => (
-                <article class="mod-card" key={manifest.id}>
-                  <a href={url} class="mod-card-link">
-                    <img
-                      src={manifest.iconUrl || PLACEHOLDER_ICON}
-                      alt={`${stripColorCodes(title)} icon`}
-                      class="mod-card-icon"
-                      width="80"
-                      height="80"
-                      loading="lazy"
-                    />
-                    <div class="mod-card-content">
-                      <h3 dangerouslySetInnerHTML={{ __html: colorCodesToHtml(title) }} />
-                      <div style={{ display: "flex", "justify-content": "space-between" }}>
-                        <p class="mod-meta">
-                          v{manifest.version} · {manifest.author}
-                        </p>
-                        <p class="mod-meta">
-                          {manifest.categories?.join(", ")}
-                        </p>
-                      </div>
-                      <p
-                        class="mod-desc"
-                        dangerouslySetInnerHTML={{
-                          __html: colorCodesToHtml(manifest.shortDescription),
-                        }}
-                      />
-                    </div>
-                  </a>
-                </article>
+              {recentMods.map((mod) => (
+                <ModCard
+                  key={mod.manifest.id}
+                  url={mod.url}
+                  title={mod.title}
+                  manifest={mod.manifest}
+                  showCategories
+                />
               ))}
             </div>
             <p>
@@ -168,7 +109,6 @@ export default ({ search }: Lume.Data) => {
           </ul>
         </section>
       </main>
-      {/* </div> */}
     </>
   )
 }

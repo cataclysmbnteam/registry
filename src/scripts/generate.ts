@@ -48,7 +48,7 @@ export const loadManifests = async (
  * Generate combined JSON index.
  */
 export const generateJsonIndex = (manifests: ModManifest[]): string => {
-  const sorted = [...manifests].sort((a, b) => a.displayName.localeCompare(b.displayName))
+  const sorted = [...manifests].sort((a, b) => a.display_name.localeCompare(b.display_name))
   return JSON.stringify(sorted, null, 2)
 }
 
@@ -56,7 +56,7 @@ export const generateJsonIndex = (manifests: ModManifest[]): string => {
  * Generate Markdown table of mods.
  */
 export const generateMarkdownTable = (manifests: ModManifest[]): string => {
-  const sorted = [...manifests].sort((a, b) => a.displayName.localeCompare(b.displayName))
+  const sorted = [...manifests].sort((a, b) => a.display_name.localeCompare(b.display_name))
 
   let buffer = `# Cataclysm: Bright Nights Mod Registry
 
@@ -67,12 +67,12 @@ This is an automatically generated list of mods in the registry.
 `
 
   for (const mod of sorted) {
-    const iconUrl = mod.iconUrl ?? DEFAULT_ICON
+    const iconUrl = mod.icon_url ?? DEFAULT_ICON
     const downloadUrl = mod.source.url
-    const description = mod.shortDescription.replace(/\|/g, "\\|").trim()
+    const description = mod.short_description.replace(/\|/g, "\\|").trim()
 
     buffer +=
-      `| ![Icon](${iconUrl}) | [${mod.displayName}](${downloadUrl}) | ${mod.author} | ${mod.version} | ${description} |\n`
+      `| ![Icon](${iconUrl}) | [${mod.display_name}](${downloadUrl}) | ${mod.author} | ${mod.version} | ${description} |\n`
   }
 
   return buffer

@@ -1,0 +1,27 @@
+schema_version: "1.0"
+id: recruitment_options
+display_name: NPC Recruitment Options
+short_description: >-
+  Gives special recruitment dialog if your character and an NPC have certain
+  traits, stats, effects, or gear.  Post-threshold mutants will always join
+  their own kind.
+author:
+  - Sunshine
+license: ALL-RIGHTS-RESERVED
+homepage: >-
+  https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/tree/master/Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Recruitment_Options
+version: 0.0.0
+source:
+  type: github_archive
+  url: >-
+    https://github.com/Zlorthishen/BrightNights-Structured-Kenan-Modpack/archive/refs/heads/master.zip
+  commit_sha: 142b53ba0079e9c0aea3e8e674ad17a7dc193d07
+  extract_path: >-
+    Kenan-BrightNights-Structured-Modpack/High-Maintenance-Huge-Mods/Recruitment_Options
+categories:
+  - misc_additions
+dependencies:
+  bn: ">=0.9.1"
+autoupdate:
+  type: commit
+  branch: master

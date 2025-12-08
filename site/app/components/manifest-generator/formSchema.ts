@@ -6,7 +6,7 @@
 import * as v from "valibot"
 import {
   AutoupdateType,
-  ManifestIdPattern,
+  ModIdPattern,
   semVerCheck,
   SourceType,
 } from "../../../../src/schema/manifest.ts"
@@ -17,13 +17,13 @@ import {
  * but with a flat structure suitable for form inputs.
  */
 export const ManifestFormSchema = v.object({
-  // Identity - reuses ManifestIdPattern from manifest.ts
+  // Identity - URL-representable mod ID
   id: v.pipe(
     v.string(),
     v.nonEmpty("ID is required"),
     v.regex(
-      ManifestIdPattern,
-      "ID must be lowercase alphanumeric with underscores",
+      ModIdPattern,
+      "ID must be URL-representable: lowercase alphanumeric with underscores/dashes",
     ),
   ),
   displayName: v.pipe(

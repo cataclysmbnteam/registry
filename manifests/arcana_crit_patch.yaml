@@ -1,26 +1,28 @@
-schemaVersion: "1.0"
+schema_version: "1.0"
 id: arcana_crit_patch
-displayName: Arcana/C.R.I.T. Patchmod
-shortDescription: >-
+display_name: Arcana/C.R.I.T. Patchmod
+short_description: >-
   Optional patch mod that allows content in Arcana and C.R.I.T. to interact with
   each other.
 author:
   - Chaosvolt
-license: ALL-RIGHTS-RESERVED
+license: CC-BY-SA-3.0
 homepage: >-
   https://github.com/chaosvolt/cdda-arcana-mod/tree/master/Patchmods/BN_Arcana_Crit_Patch
 version: 0.0.0
 source:
   type: github_archive
   url: "https://github.com/chaosvolt/cdda-arcana-mod/archive/refs/heads/master.zip"
-  commitSha: c844bca7bec22f0c240067a37407abc2b9d4c553
-  extractPath: cdda-arcana-mod-master/Patchmods/BN_Arcana_Crit_Patch
+  commit_sha: 37718985431bdbfbee1488e23747edbed3440cbf
+  extract_path: Patchmods/BN_Arcana_Crit_Patch
 categories:
   - misc_additions
 dependencies:
   bn: ">=0.9.1"
-  Arcana: "*"
+  arcana: "*"
   crt_expansion: "*"
 autoupdate:
   type: commit
   branch: master
+last_updated: "2025-12-08T17:38:23.168Z"
+parent: arcana

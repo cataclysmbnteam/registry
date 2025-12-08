@@ -1,12 +1,247 @@
-/* Override classless body padding for fixed nav */
-body {
-  padding-top: 4rem;
+/* Lume Design System */
+@import "https://unpkg.com/@lumeland/ds@0.5.2/ds.css";
+
+* {
+  border-radius: 0 !important;
 }
 
 /* Nav styling */
 body > nav,
 header nav {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  background-color: var(--color-highlight);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0 1rem;
+}
+
+body > nav ul,
+header nav ul {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body > nav a,
+header nav a {
+  color: var(--color-text);
+  text-decoration: none;
+  font: var(--font-ui);
+}
+
+body > nav a:hover,
+header nav a:hover {
+  color: var(--color-primary);
+}
+
+body > nav .logo a,
+header nav .logo a {
+  font: var(--font-ui-bold);
+  color: var(--color-base);
+}
+
+body > nav .sticky,
+header nav .sticky {
+  margin-left: auto;
+}
+
+body > nav .btn-add,
+header nav .btn-add {
+  background: var(--color-primary);
+  color: var(--color-background);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+}
+
+body > nav .btn-add:hover,
+header nav .btn-add:hover {
+  background: var(--color-primary-highlight);
+  color: var(--color-background);
+}
+
+/* Theme toggle button */
+body > nav .theme-toggle,
+header nav .theme-toggle {
+  display: flex;
+  align-items: center;
+}
+
+body > nav .btn-theme,
+header nav .btn-theme {
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--animation-duration);
+}
+
+body > nav .btn-theme:hover,
+header nav .btn-theme:hover {
+  color: var(--color-primary);
+}
+
+body > nav .btn-theme svg,
+header nav .btn-theme svg {
+  display: block;
+}
+
+/* Hamburger menu button */
+body > nav .hamburger-wrapper,
+header nav .hamburger-wrapper {
+  display: none;
+}
+
+body > nav .hamburger,
+header nav .hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 24px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+}
+
+body > nav .hamburger span,
+header nav .hamburger span {
+  width: 24px;
+  height: 3px;
+  background: var(--color-text);
+  transition: all 0.3s linear;
+  transform-origin: 1px;
+}
+
+/* Hamburger animation when open */
+body > nav .hamburger.open span:nth-child(1),
+header nav .hamburger.open span:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+body > nav .hamburger.open span:nth-child(2),
+header nav .hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+body > nav .hamburger.open span:nth-child(3),
+header nav .hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+/* Nav menu wrapper (for layout) */
+body > nav .nav-menu-wrapper,
+header nav .nav-menu-wrapper {
+  display: contents;
+}
+
+/* Nav menu items container */
+body > nav .nav-menu,
+header nav .nav-menu {
+  display: contents;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Mobile responsive navigation */
+@media (max-width: 768px) {
+  body > nav .hamburger-wrapper,
+  header nav .hamburger-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  body > nav .nav-menu-wrapper,
+  header nav .nav-menu-wrapper {
+    display: none;
+    position: fixed;
+    top: 3rem;
+    right: 0;
+    width: 200px;
+    max-height: calc(100vh - 3rem);
+    background: var(--color-highlight);
+    box-shadow: -2px 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 99;
+  }
+
+  body > nav .nav-menu,
+  header nav .nav-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+
+  body > nav .nav-menu.open,
+  header nav .nav-menu.open {
+    display: flex;
+  }
+
+  /* Show wrapper when menu is open */
+  body > nav .nav-menu-wrapper:has(.nav-menu.open),
+  header nav .nav-menu-wrapper:has(.nav-menu.open) {
+    display: block;
+  }
+
+  body > nav .nav-menu li,
+  header nav .nav-menu li {
+    width: 100%;
+  }
+
+  body > nav .nav-menu a,
+  header nav .nav-menu a {
+    display: block;
+    padding: 0.5rem 0;
+  }
+
+  body > nav .sticky,
+  header nav .sticky {
+    margin-left: 0;
+  }
+
+  body > nav .btn-add,
+  header nav .btn-add {
+    width: 100%;
+    text-align: center;
+    display: block;
+  }
+
+  /* Keep logo visible and grow to push hamburger right */
+  body > nav .logo,
+  header nav .logo {
+    flex: 1;
+  }
+
+  /* Theme toggle next to hamburger */
+  body > nav .theme-toggle,
+  header nav .theme-toggle {
+    order: 0;
+  }
+}
+
+/* Main content area */
+body {
+  padding-top: 4rem;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
 /* Mod Cards */
@@ -20,14 +255,53 @@ header nav {
 .mod-card {
   padding: 0;
   display: flex;
-  border-radius: 8px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: var(--border-radius);
+  transition: transform var(--animation-duration), box-shadow var(--animation-duration);
   overflow: hidden;
+  background: var(--color-highlight);
+  border: 1px solid var(--color-line);
 }
 
 .mod-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Stacked card effect for mod groups with submods */
+.mod-card-stacked {
+  position: relative;
+  margin-bottom: 12px;
+  margin-right: 8px;
+  overflow: visible;
+}
+
+.mod-card-stacked .mod-card-link {
+  position: relative;
+  z-index: 2;
+  background: var(--color-highlight);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-line);
+}
+
+.mod-card-stack {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: var(--color-line);
+  border: 1px solid var(--color-line-dark, rgba(0, 0, 0, 0.05));
+  border-radius: var(--border-radius);
+}
+
+.mod-card-stack-2 {
+  transform: translate(6px, 6px);
+  z-index: 1;
+}
+
+.mod-card-stack-3 {
+  transform: translate(12px, 12px);
+  z-index: 0;
 }
 
 .mod-card-link {
@@ -42,7 +316,7 @@ header nav {
 .mod-card-icon {
   width: 80px;
   height: 80px;
-  border-radius: 6px;
+  border-radius: var(--border-radius);
   object-fit: cover;
   flex-shrink: 0;
 }
@@ -54,55 +328,63 @@ header nav {
 
 .mod-card h3 {
   margin: 0 0 0.25rem 0;
-  font-size: 1.1rem;
+  font: var(--font-ui-bold);
+  color: var(--color-base);
 }
 
 .mod-card .mod-meta {
-  font-size: 0.8rem;
+  font: var(--font-small);
+  color: var(--color-dim);
   margin: 0 0 0.5rem 0;
 }
 
 .mod-card .mod-desc {
-  font-size: 0.85rem;
+  font: var(--font-small);
+  color: var(--color-text);
   margin: 0;
   line-height: 1.4;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
   overflow: hidden;
 }
 
 .mod-icon {
   width: 120px;
   height: 120px;
-  border-radius: 12px;
+  border-radius: var(--border-radius);
   object-fit: cover;
-  border: 2px solid;
+  border: 2px solid var(--color-line);
 }
 
-.mod-page .mod-meta {
+.mod-page aside {
   padding: 1.5rem;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   position: sticky;
   top: 5rem;
   height: fit-content;
-  border: 1px solid;
+  border: 1px solid var(--color-line);
+  background: var(--color-highlight);
 }
 
-.mod-page .mod-meta dl {
+.mod-page aside dl {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.5rem 1rem;
   margin: 0;
   padding: 0;
+  font: var(--font-small);
 }
 
-.mod-page .mod-meta dt {
-  color: var(--cdark);
+.mod-page aside dt {
+  color: var(--color-dim);
   font-weight: normal;
 }
 
-.mod-page .mod-meta dd {
+.mod-page aside dd {
   margin: 0;
+  color: var(--color-text);
 }
 
 /* Mod Content Section */
@@ -111,9 +393,10 @@ header nav {
 }
 
 .mod-content h2 {
-  color: var(--cemph);
-  border-bottom: 1px solid;
+  color: var(--color-base);
+  border-bottom: 1px solid var(--color-line);
   padding-bottom: 0.5rem;
+  font: var(--font-title);
 }
 
 /* Category Filter */
@@ -129,25 +412,27 @@ header nav {
   align-items: center;
   gap: 0.3rem;
   padding: 0.3rem 0.8rem;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  font-size: 0.9rem;
-  border: 1px solid;
-  transition: border-color 0.2s, background 0.2s;
+  font: var(--font-small);
+  border: 1px solid var(--color-line);
+  transition: border-color var(--animation-duration), background var(--animation-duration);
   user-select: none;
+  background: var(--color-highlight);
 }
 
 .category-checkbox:hover {
-  border-color: var(--cemph);
+  border-color: var(--color-primary);
 }
 
 .category-checkbox:has(input:checked) {
-  background: var(--cemphbg);
-  border-color: var(--cemph);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-background);
 }
 
 .category-checkbox input[type="checkbox"] {
-  accent-color: var(--cemph);
+  accent-color: var(--color-primary);
   margin: 0;
 }
 
@@ -156,19 +441,19 @@ header nav {
   align-items: center;
   gap: 0.3rem;
   padding: 0.3rem 0.8rem;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  font-size: 0.9rem;
-  border: 1px solid;
-  transition: border-color 0.2s;
+  font: var(--font-small);
+  border: 1px solid var(--color-line);
+  transition: border-color var(--animation-duration);
 }
 
 .category-filters label:hover {
-  border-color: var(--cemph);
+  border-color: var(--color-primary);
 }
 
 .category-filters input[type="checkbox"] {
-  accent-color: var(--cemph);
+  accent-color: var(--color-primary);
 }
 
 .flex {
@@ -182,17 +467,19 @@ header nav {
   padding: 2rem 0;
   padding-top: 0;
   margin-bottom: 2rem;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid var(--color-line);
 }
 
 .hero h1 {
-  font-size: 2.5em;
+  font: var(--font-display);
+  letter-spacing: var(--font-display-spacing);
   margin-bottom: 0.5rem;
+  color: var(--color-base);
 }
 
 .hero p {
-  font-size: 1.2em;
-  color: var(--cdark);
+  font: var(--font-body);
+  color: var(--color-dim);
 }
 
 /* Main Layout with Sidebar */
@@ -207,14 +494,16 @@ header nav {
   position: sticky;
   top: 5rem;
   padding: 1rem;
-  border: 1px solid;
+  border: 1px solid var(--color-line);
+  border-radius: var(--border-radius);
+  background: var(--color-highlight);
 }
 
 .sidebar h2 {
   margin: 0 0 1rem 0;
-  font-size: 1.1rem;
-  color: var(--cemph);
-  border-bottom: 1px solid;
+  font: var(--font-ui-bold);
+  color: var(--color-base);
+  border-bottom: 1px solid var(--color-line);
   padding-bottom: 0.5rem;
 }
 
@@ -237,5 +526,66 @@ body > footer {
   text-align: center;
   padding: 1.5rem;
   margin-top: 4rem;
-  border-top: 1px solid;
+  border-top: 1px solid var(--color-line);
+  color: var(--color-dim);
+  font: var(--font-small);
+}
+
+body > footer a {
+  color: var(--color-text);
+}
+
+body > footer a:hover {
+  color: var(--color-primary);
+}
+
+/* Submod badge - extends .badge from DS */
+.submod-badge {
+  background: var(--color-primary);
+  color: var(--color-background);
+  border-color: var(--color-primary);
+  margin-left: 0.5rem;
+}
+
+.submod-badge:hover {
+  background: var(--color-primary-highlight);
+  border-color: var(--color-primary-highlight);
+}
+
+/* Mod categories badges container */
+.mod-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+}
+
+/* Related mods grid on mod detail page */
+.related-mods {
+  margin-top: 1rem;
+}
+
+/* Dependency links */
+.dep-link {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.dep-link:hover {
+  text-decoration: underline;
+}
+
+.version-constraint {
+  color: var(--color-dim);
+  font: var(--font-small);
+}
+
+/* Mod page header with clickable title */
+.mod-page header a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.mod-page header a:hover h1 {
+  color: var(--color-primary);
 }
