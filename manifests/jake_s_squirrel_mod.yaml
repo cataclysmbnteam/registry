@@ -6,6 +6,7 @@ author:
   - NakedJake
 license: ALL-RIGHTS-RESERVED
 homepage: "https://github.com/NobleJake/ProjectPackRat/tree/main/ProjectSquirrel"
+icon_url: "https://media.discordapp.net/attachments/1093580823351001098/1447950186092429414/viewimage-1371.png?ex=69397c31&is=69382ab1&hm=db85a25e2c51d15167cff45501c37e607025d8edcbac9d68fdd08f85aef3a6cd&=&format=webp&quality=lossless&width=569&height=569"
 version: 0.0.0
 source:
   type: github_archive
