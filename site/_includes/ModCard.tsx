@@ -5,7 +5,6 @@
 import type { ModManifest } from "../../mod.ts"
 import { colorCodesToHtml, stripColorCodes } from "../../src/utils/color.ts"
 
-/** Default placeholder for mods without icons */
 export const PLACEHOLDER_ICON = "/assets/mod-placeholder.svg"
 
 export interface ModCardProps {

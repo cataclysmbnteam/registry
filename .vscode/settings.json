@@ -1,9 +1,14 @@
 {
-  "[typescript][typescriptreact][css][markdown]": {
-    "editor.defaultFormatter": "denoland.vscode-deno"
-  },
+  "[typescript]": { "editor.defaultFormatter": "denoland.vscode-deno" },
+  "[typescriptreact]": { "editor.defaultFormatter": "denoland.vscode-deno" },
+  "[css]": { "editor.defaultFormatter": "denoland.vscode-deno" },
+  "[markdown]": { "editor.defaultFormatter": "denoland.vscode-deno" },
   "search.exclude": {
     "manifests": true,
     "generated": true
+  },
+  "deno.config": "./deno.jsonc",
+  "yaml.schemas": {
+    "generated/mod_manifest.schema.json": "manifests/*.yaml"
   }
 }

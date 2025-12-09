@@ -8,7 +8,8 @@
 import { Command } from "@cliffy/command"
 import * as YAML from "@std/yaml"
 import { walk } from "@std/fs"
-import type { ModManifest } from "../schema/manifest.ts"
+import { ModManifest } from "../schema/manifest.ts"
+import { toJsonSchema } from "@valibot/to-json-schema"
 
 const DEFAULT_ICON =
   "https://raw.githubusercontent.com/cataclysmbnteam/Cataclysm-BN/main/gfx/app_icon/app-icon.svg"
@@ -92,17 +93,18 @@ export const generateAll = async (
   const manifests = await loadManifests(manifestDir)
   console.log(`Found ${manifests.length} manifests`)
 
-  // Generate JSON index
-  const jsonIndex = generateJsonIndex(manifests)
-  const jsonPath = `${outputDir}/mods.json`
-  await Deno.writeTextFile(jsonPath, jsonIndex)
-  console.log(`Generated ${jsonPath}`)
-
-  // Generate Markdown table
-  const markdownTable = generateMarkdownTable(manifests)
-  const mdPath = `${outputDir}/MODS.md`
-  await Deno.writeTextFile(mdPath, markdownTable)
-  console.log(`Generated ${mdPath}`)
+  await Promise.all([
+    await Deno.writeTextFile(`${outputDir}/mods.json`, generateJsonIndex(manifests)),
+    await Deno.writeTextFile(`${outputDir}/mods.md`, generateMarkdownTable(manifests)),
+    await Deno.writeTextFile(
+      `${outputDir}/mod_manifest.schema.json`,
+      JSON.stringify(
+        toJsonSchema(ModManifest, { typeMode: "input", errorMode: "ignore" }),
+        null,
+        2,
+      ),
+    ),
+  ])
 }
 
 // CLI entry point

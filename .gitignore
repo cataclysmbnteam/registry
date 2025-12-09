@@ -10,7 +10,7 @@ _cache/
 
 # Generated files (can be regenerated)
 generated/mods.json
-generated/MODS.md
+generated/mods.md
 generated/mods/
 
 # Playwright MCP screenshots

@@ -15,7 +15,6 @@ export {
 } from "./src/schema/manifest.ts"
 
 export {
-  getModId,
   type ModCategory,
   type ModInfo,
   modInfoToManifestBase,

@@ -39,8 +39,7 @@ export const VersionSection = () => (
             <button
               type="button"
               class="btn-remove"
-              onClick={() =>
-                store.dependencies.splice(index, 1)}
+              onClick={() => store.dependencies.splice(index, 1)}
             >
               ×
             </button>

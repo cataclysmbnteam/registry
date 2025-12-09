@@ -5,7 +5,7 @@ id: example_modpack_mod
 display_name: "Example Modpack Mod"
 short_description: "A sample mod from a larger modpack, demonstrating extract_path usage."
 
-author: "Modpack Author & Contributors"
+author: ["Modpack Author & Contributors"]
 license: "GPL-3.0-or-later"
 homepage: "https://github.com/modpack-author/BN-Modpack"
 
@@ -25,7 +25,7 @@ tags:
 source:
   type: github_archive
   url: "https://github.com/modpack-author/BN-Modpack/archive/abc123def456.zip"
-  commit_sha: "abc123def456"
+  commit_sha: "aabbccddeeff00112233445566778899aabbccdd"
   # This is the key feature: extract only this subfolder from the archive
   extract_path: "BN-Modpack-abc123def456/Mods/DinoMod"
 

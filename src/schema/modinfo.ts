@@ -56,40 +56,19 @@ export const ModInfo = v.object({
     ),
     v.nonEmpty("Mod ID cannot be empty"),
   ),
-  name: v.pipe(
-    v.string("Displayed name in mod selection"),
-    v.nonEmpty("Mod name cannot be empty"),
-  ),
-  authors: v.optional(
-    v.array(v.string(), "Author(s) of the mod"),
-  ),
+  name: v.pipe(v.string("Displayed name in mod selection"), v.nonEmpty("Mod name cannot be empty")),
+  authors: v.optional(v.array(v.string(), "Author(s) of the mod")),
   license: v.optional(License),
-  description: v.optional(
-    v.string("Longer description shown in mod details"),
-  ),
+  description: v.optional(v.string("Longer description shown in mod details")),
   category: v.optional(ModCategory),
   dependencies: v.optional(
-    v.array(
-      v.string(),
-      'List of mod IDs this mod depends on. "dda" = base game, "bn" = Bright Nights specific',
-    ),
+    v.array(v.string(), 'List of mod IDs this mod depends on. "bn" = base game'),
   ),
-  version: v.optional(
-    v.string("Mod version string. Optional but recommended."),
-  ),
-  obsolete: v.optional(
-    v.boolean("If true, mod provides a custom world generation"),
-  ),
-  maintainers: v.optional(
-    v.array(v.string(), "Maintainers who have permission to update"),
-  ),
+  version: v.optional(v.string("Mod version string. Optional but recommended.")),
+  obsolete: v.optional(v.boolean("If true, mod provides a custom world generation")),
+  maintainers: v.optional(v.array(v.string(), "Maintainers who have permission to update")),
 })
 export type ModInfo = v.InferOutput<typeof ModInfo>
-
-/**
- * Gets the mod ID from a ModInfo object.
- */
-export const getModId = (modinfo: ModInfo): string => modinfo.id
 
 /**
  * Raw modinfo.json entry structure (permissive for parsing).
@@ -165,7 +144,7 @@ export const modInfoToManifestBase = (
   author: string
   dependencies?: Dependencies
 } => ({
-  id: getModId(modinfo),
+  id: modinfo.id,
   displayName: modinfo.name,
   description: modinfo.description,
   author: modinfo.authors?.join(", ") ?? "Unknown",

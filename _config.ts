@@ -1,6 +1,5 @@
 import lume from "lume/mod.ts"
 import date from "lume/plugins/date.ts"
-import code_highlight from "lume/plugins/code_highlight.ts"
 import pagefind from "lume/plugins/pagefind.ts"
 import jsx from "lume/plugins/jsx.ts"
 import metas from "lume/plugins/metas.ts"
@@ -8,10 +7,7 @@ import sitemap from "lume/plugins/sitemap.ts"
 import esbuild from "lume/plugins/esbuild.ts"
 import relativeUrls from "lume/plugins/relative_urls.ts"
 
-const site = lume({
-  src: "./site",
-  dest: "./_site",
-})
+const site = lume({ src: "./site", dest: "./_site" })
 
 // Bundle Preact app for manifest generator (must be before metas)
 site.add("app/main.tsx")
@@ -20,7 +16,6 @@ site.use(esbuild({ denoConfig: "site/app/deno.json", options: { sourcemap: "both
 // Core plugins
 site.use(relativeUrls())
 site.use(date())
-site.use(code_highlight())
 
 // Pagefind search - use two container IDs for different sections
 // The 'search' container shows mods only, 'docs-search' shows docs only

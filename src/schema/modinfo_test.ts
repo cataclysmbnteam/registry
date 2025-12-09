@@ -4,7 +4,7 @@
  */
 
 import { assertEquals } from "@std/assert"
-import { convertDependencies, getModId, modInfoToManifestBase, parseModInfo } from "./modinfo.ts"
+import { convertDependencies, modInfoToManifestBase, parseModInfo } from "./modinfo.ts"
 
 Deno.test("parseModInfo - single object", () => {
   const json = JSON.stringify({
@@ -74,15 +74,6 @@ Deno.test("parseModInfo - accepts valid optional fields", () => {
   assertEquals(result[0].id, "full_mod")
   assertEquals(result[0].authors, ["Author1", "Author2"])
   assertEquals(result[0].category, "content")
-})
-
-Deno.test("getModId - returns id", () => {
-  const modinfo = {
-    type: "MOD_INFO" as const,
-    id: "test_mod",
-    name: "Test Mod",
-  }
-  assertEquals(getModId(modinfo), "test_mod")
 })
 
 // convertDependencies tests

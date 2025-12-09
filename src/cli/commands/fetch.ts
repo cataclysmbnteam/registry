@@ -16,7 +16,6 @@ import { type ModManifest, Version } from "../../schema/manifest.ts"
 import {
   buildArchiveUrl,
   buildGitHubPath,
-  getModId,
   parseGitHubUrl,
   stripColorCodes,
   toManifestId,
@@ -109,7 +108,7 @@ const generateManifest = (
   branch: string,
   commitSha: string,
 ): ModManifest => {
-  const modId = getModId(mod.modinfo) ?? "unknown"
+  const modId = mod.modinfo.id ?? "unknown"
   const manifestId = toManifestId(modId)
   const archiveUrl = buildArchiveUrl(owner, repo, branch)
 
@@ -254,7 +253,7 @@ export const fetchCommand = new Command()
     } else {
       // Use dax multiSelect for interactive selection
       const selectOptions = modsToProcess.map((mod) => ({
-        text: `${mod.modinfo.name} (${getModId(mod.modinfo)}) - ${mod.path || "root"}`,
+        text: `${mod.modinfo.name} (${mod.modinfo.id}) - ${mod.path || "root"}`,
         selected: true,
       }))
 

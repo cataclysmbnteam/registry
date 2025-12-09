@@ -7,6 +7,7 @@ import * as YAML from "@std/yaml"
 import { walk } from "@std/fs"
 import { dirname, fromFileUrl, join } from "@std/path"
 import type { ModManifest } from "../../src/schema/manifest.ts"
+import { MetaData } from "lume/plugins/metas.ts"
 
 export const layout = "mod.tsx"
 
@@ -66,6 +67,15 @@ export default async function* () {
   yield* manifests.map((manifest) => ({
     url: `/mods/${manifest.id}/`,
     title: manifest.display_name,
+    metas: {
+      title: manifest.display_name,
+      description: manifest.short_description,
+      image: manifest.icon_url,
+      type: "article",
+      lang: "en",
+      site: "=siteName",
+      keywords: ["Cataclysm: Bright Nights", "BN", "mod"].concat(manifest.tags ?? []),
+    } satisfies MetaData,
     tags: ["mod"],
     manifest,
     parentMod: findParentMod(manifest, manifests),

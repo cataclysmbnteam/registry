@@ -17,9 +17,7 @@ interface FileResult {
 
 /** Check a single manifest file, optionally writing sorted YAML */
 const checkManifestFile = async (
-  filePath: string,
-  quiet: boolean,
-  write: boolean,
+  { filePath, quiet, write }: { filePath: string; quiet: boolean; write: boolean },
 ): Promise<FileResult> => {
   const content = await Deno.readTextFile(filePath)
   const manifest = YAML.parse(content)
@@ -75,7 +73,7 @@ const checkAllManifests = async (
     }
 
     try {
-      const result = await checkManifestFile(entry.path, quiet, write)
+      const result = await checkManifestFile({ filePath: entry.path, quiet, write })
       total++
       if (result.valid) valid++
       if (result.written) written++
@@ -96,16 +94,15 @@ export const validateCommand = new Command()
   .arguments("[target:string]")
   .option("-q, --quiet", "Only show summary, not individual file results")
   .option("-w, --write", "Reformat valid manifests with sorted keys")
-  .action(async (options, target = "manifests") => {
+  .action(async ({ quiet = true, write = false }, target = "manifests") => {
     try {
       const stat = await Deno.stat(target)
-      const write = options.write ?? false
 
       if (stat.isDirectory) {
-        if (!options.quiet) {
+        if (!quiet) {
           console.log(`Checking manifests in ${target}/\n`)
         }
-        const result = await checkAllManifests(target, options.quiet ?? false, write)
+        const result = await checkAllManifests(target, quiet, write)
 
         console.log(`\nSummary:`)
         console.log(`  Total: ${result.total}`)
@@ -122,7 +119,11 @@ export const validateCommand = new Command()
           Deno.exit(1)
         }
       } else {
-        const result = await checkManifestFile(target, options.quiet ?? false, write)
+        const result = await checkManifestFile({
+          filePath: target,
+          quiet: quiet,
+          write,
+        })
         if (!result.valid) {
           Deno.exit(1)
         }

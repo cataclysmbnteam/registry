@@ -4,8 +4,6 @@
  * and converting modinfo to manifest format.
  */
 
-import { getModId } from "../schema/modinfo.ts"
-
 /**
  * Parsed GitHub repository info
  */
@@ -143,6 +141,3 @@ export const buildGitHubPath = (
   }
   return `https://github.com/${owner}/${repo}/tree/${branch}/${path}`
 }
-
-// Re-export getModId for convenience
-export { getModId }

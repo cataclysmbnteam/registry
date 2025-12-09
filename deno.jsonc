@@ -11,6 +11,7 @@
     "@std/semver": "jsr:@std/semver@^1.0.7",
     "@std/text": "jsr:@std/text@^1.0.16",
     "@std/yaml": "jsr:@std/yaml@^1.0.10",
+    "@valibot/to-json-schema": "npm:@valibot/to-json-schema@^1.4.0",
     "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/",
     "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.12/jsx-runtime.ts",
     "deepsignal": "npm:deepsignal@^1.6.0",
@@ -117,7 +118,8 @@
     "rules": {
       "exclude": [
         "no-import-prefix",
-        "no-external-import"
+        "no-external-import",
+        "no-unversioned-import"
       ]
     }
   }

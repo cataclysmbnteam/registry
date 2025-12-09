@@ -6,7 +6,6 @@
 import { CommonLicenses } from "./types.ts"
 import { store } from "./store.ts"
 
-
 export const AttributionSection = () => (
   <section class="form-section">
     <h3>Attribution</h3>
@@ -19,14 +18,12 @@ export const AttributionSection = () => (
               type="text"
               placeholder={`Author ${index + 1}`}
               value={author}
-              onInput={(e) =>
-                store.author[index] = e.currentTarget.value}
+              onInput={(e) => store.author[index] = e.currentTarget.value}
             />
             <button
               type="button"
               class="btn-remove"
-              onClick={() =>
-                store.dependencies.splice(index, 1)}
+              onClick={() => store.dependencies.splice(index, 1)}
             >
               ×
             </button>

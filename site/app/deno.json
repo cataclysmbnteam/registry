@@ -1,5 +1,7 @@
 {
-  "fmt": { "semiColons": false },
+  "fmt": {
+    "semiColons": false
+  },
   "imports": {
     "@octokit/rest": "npm:@octokit/rest@^22.0.1",
     "@std/semver": "jsr:@std/semver@^1.0.7",
@@ -13,5 +15,14 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
+  },
+  "lint": {
+    "rules": {
+      "exclude": [
+        "no-import-prefix",
+        "no-external-import",
+        "no-unversioned-import"
+      ]
+    }
   }
 }

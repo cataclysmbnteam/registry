@@ -14,20 +14,28 @@ export default (
 
   // Theme initialization script (runs immediately to prevent flash)
   const themeScript = `
+    const changeHighlight = () => {
+      const light = document.getElementById("highlight-theme-light")
+      if (light) light.disabled = theme === "dark"
+      const dark = document.getElementById("highlight-theme-dark")
+      if (dark) dark.disabled = theme === "light"
+    }
     let theme = localStorage.getItem("theme") ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    document.documentElement.dataset.theme = theme;
+      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+    changeHighlight()
+    document.documentElement.dataset.theme = theme
     function changeTheme() {
-      theme = theme === "dark" ? "light" : "dark";
-      localStorage.setItem("theme", theme);
-      document.documentElement.dataset.theme = theme;
+      theme = theme === "dark" ? "light" : "dark"
+      localStorage.setItem("theme", theme)
+      document.documentElement.dataset.theme = theme
+      changeHighlight()
     }
     function toggleMenu() {
-      const menu = document.getElementById("nav-menu");
-      const hamburger = document.querySelector(".hamburger");
+      const menu = document.getElementById("nav-menu")
+      const hamburger = document.querySelector(".hamburger")
       if (menu) {
-        menu.classList.toggle("open");
-        hamburger?.classList.toggle("open");
+        menu.classList.toggle("open")
+        hamburger?.classList.toggle("open")
       }
     }
   `
@@ -59,7 +67,17 @@ export default (
           {/* Theme script - must run before body to prevent flash */}
           <script dangerouslySetInnerHTML={{ __html: themeScript }} />
           {/* Our styles (imports @lumeland/ds) */}
-          <link rel="stylesheet" href="/styles.css" />
+          <link rel="stylesheet" href="/assets/styles.css" />
+          <link
+            id="highlight-theme-light"
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/styles/github.min.css"
+          />
+          <link
+            id="highlight-theme-dark"
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/styles/dark.min.css"
+          />
         </head>
         <body>
           <div id={searchId}></div>

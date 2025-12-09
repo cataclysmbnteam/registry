@@ -1,11 +1,10 @@
 schema_version: "1.0"
 
-# A standalone mod from a single repository
 id: example_standalone_mod
 display_name: "Example Standalone Mod"
 short_description: "A sample standalone mod demonstrating registry manifest format."
 
-author: "Registry Contributors"
+author: ["Registry Contributors"]
 license: "CC-BY-SA-4.0"
 homepage: "https://github.com/cataclysmbnteam/example-mod"
 
@@ -20,7 +19,7 @@ categories:
 source:
   type: github_archive
   url: "https://github.com/cataclysmbnteam/example-mod/archive/refs/tags/v1.0.0.zip"
-  commit_sha: "abc123def456"
+  commit_sha: "aabbccddeeff00112233445566778899aabbccdd"
 
 # Autoupdate configuration for tag-based releases
 autoupdate:

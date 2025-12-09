@@ -8,7 +8,8 @@
 
 import * as v from "valibot"
 import * as semver from "@std/semver"
-
+import { store } from "../../site/app/components/manifest-generator/store.ts"
+import { computed } from "@preact/signals"
 /**
  * Custom valibot action for validating SemVer strings.
  * Uses @std/semver for parsing.
@@ -302,28 +303,7 @@ export type ModManifestWithDefaults = v.InferOutput<typeof ModManifestWithDefaul
  * Converts store state to a manifest object with defaults applied.
  * Filters out empty/undefined optional fields for clean YAML output.
  */
-export const storeToManifest = (store: {
-  id: string
-  displayName: string
-  shortDescription: string
-  description: string
-  author: string[]
-  license: string
-  homepage: string
-  version: string
-  dependencies: [string, string][]
-  sourceType: string
-  sourceUrl: string
-  commitSha: string
-  extractPath: string
-  categories: string[]
-  tags: string[]
-  iconUrl?: string
-  enableAutoupdate: boolean
-  autoupdateType: string
-  autoupdateBranch: string
-  autoupdateRegex?: string
-}): ModManifestWithDefaults => {
+export const storeToManifest = computed((): ModManifestWithDefaults => {
   const result = v.parse(ModManifestWithDefaults, {
     schema_version: "1.0",
     id: store.id || undefined,
@@ -378,7 +358,7 @@ export const storeToManifest = (store: {
   }
 
   return cleaned as ModManifestWithDefaults
-}
+})
 
 /**
  * Creates a default manifest with required fields.

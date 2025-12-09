@@ -4,6 +4,9 @@ import { ModCard, PLACEHOLDER_ICON } from "./ModCard.tsx"
 
 export const layout = "base.tsx"
 
+const HOME_ICON = "/assets/home-icon.svg"
+const GITHUB_ICON = "/assets/github-icon.svg"
+
 interface PageData {
   title: string
   manifest: ModManifest
@@ -20,6 +23,10 @@ const findModInRegistry = (modId: string, allManifests?: ModManifest[]): ModMani
     m.display_name.toLowerCase() === modId.toLowerCase()
   )
 
+const ModTitle = ({ title }: { title: string }) => (
+  <h1 dangerouslySetInnerHTML={{ __html: colorCodesToHtml(title) }} />
+)
+
 export default (
   { manifest, parentMod, submods = [], allManifests = [] }: PageData,
   _helpers: Lume.Helpers,
@@ -35,11 +42,26 @@ export default (
       />
       {manifest.homepage
         ? (
-          <a href={manifest.homepage} target="_blank" rel="noopener noreferrer">
-            <h1 dangerouslySetInnerHTML={{ __html: colorCodesToHtml(manifest.display_name) }} />
+          <a
+            href={manifest.homepage}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Visit Homepage"
+            class="mod-homepage-link"
+          >
+            <ModTitle title={manifest.display_name} />
+            <img
+              src={/http(s)?:\/\/(www\.)?github\.com\/.*/.test(manifest.homepage)
+                ? GITHUB_ICON
+                : HOME_ICON}
+              alt="(homepage)"
+              width="32"
+              height="32"
+              aria-hidden="true"
+            />
           </a>
         )
-        : <h1 dangerouslySetInnerHTML={{ __html: colorCodesToHtml(manifest.display_name) }} />}
+        : <ModTitle title={manifest.display_name} />}
     </header>
 
     <aside>

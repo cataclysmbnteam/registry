@@ -18,15 +18,8 @@ import {
   stripColorCodes,
   toManifestId,
 } from "../../../src/utils/github.ts"
-import {
-  createOctokit,
-  discoverMods,
-  fetchRepoMetadata,
-} from "../../../src/utils/github_fetch.ts"
-import {
-  convertDependencies,
-  parseModInfo,
-} from "../../../src/schema/modinfo.ts"
+import { createOctokit, discoverMods, fetchRepoMetadata } from "../../../src/utils/github_fetch.ts"
+import { convertDependencies, parseModInfo } from "../../../src/schema/modinfo.ts"
 import { storeToManifest } from "../../../src/schema/manifest.ts"
 import { store } from "./manifest-generator/store.ts"
 import { StatusMessages } from "./manifest-generator/StatusMessages.tsx"
@@ -40,17 +33,14 @@ import { CategoriesSection } from "./manifest-generator/CategoriesSection.tsx"
 import { AutoupdateSection } from "./manifest-generator/AutoupdateSection.tsx"
 import { ManifestOutput } from "./manifest-generator/ManifestOutput.tsx"
 import { stringifyManifest } from "../../../src/utils/stringify.ts"
+import { computed } from "@preact/signals"
 
-/** Generate manifest YAML from current store state using valibot schema */
-const getManifestYaml = (): string => {
-  const manifest = storeToManifest(store)
-  return stringifyManifest(manifest)
-}
+export const manifestYaml = computed(() => stringifyManifest(storeToManifest.value))
 
 /** Copy manifest YAML to clipboard */
 const copyToClipboard = async () => {
   try {
-    await navigator.clipboard.writeText(getManifestYaml())
+    await navigator.clipboard.writeText(manifestYaml.value)
     store.copied = true
     setTimeout(() => {
       store.copied = false
@@ -130,8 +120,7 @@ const handleFileUpload = (e: Event) => {
 const fetchFromGitHub = async () => {
   const parsed = parseGitHubUrl(store.githubUrl)
   if (!parsed) {
-    store.error =
-      "Invalid GitHub URL. Expected format: https://github.com/owner/repo"
+    store.error = "Invalid GitHub URL. Expected format: https://github.com/owner/repo"
     return
   }
 
@@ -179,8 +168,7 @@ const fetchFromGitHub = async () => {
     }
 
     store.foundMods = mods
-    store.success =
-      `Found ${mods.length} mods. Select one to generate manifest.`
+    store.success = `Found ${mods.length} mods. Select one to generate manifest.`
   } catch (err) {
     store.error = `Failed to fetch from GitHub: ${err}`
   } finally {
@@ -204,7 +192,7 @@ export const ManifestGenerator = () => (
   <div class="manifest-generator">
     <StatusMessages />
     <div class="generator-layout">
-      <div class="generator-form">
+      <div>
         <div class="import-row">
           <GitHubImport onFetch={fetchFromGitHub} onSelectMod={selectMod} />
           <FileUpload onFileUpload={handleFileUpload} />
@@ -218,11 +206,7 @@ export const ManifestGenerator = () => (
           <AutoupdateSection />
         </div>
       </div>
-      <ManifestOutput
-        manifestYaml={getManifestYaml()}
-        copied={store.copied}
-        onCopy={copyToClipboard}
-      />
+      <ManifestOutput copied={store.copied} onCopy={copyToClipboard} />
     </div>
   </div>
 )

@@ -53,8 +53,10 @@
     "npm:@preact/signals@^2.5.1": "2.5.1_preact@10.28.0",
     "npm:@sinclair/typebox@~0.34.41": "0.34.41",
     "npm:@types/node@*": "24.2.0",
+    "npm:@valibot/to-json-schema@^1.4.0": "1.4.0_valibot@1.2.0",
     "npm:date-fns@4.1.0": "4.1.0",
     "npm:deepsignal@^1.6.0": "1.6.0_@preact+signals@2.5.1__preact@10.28.0_preact@10.28.0",
+    "npm:highlight.js@*": "11.11.1",
     "npm:highlight.js@11.11.1": "11.11.1",
     "npm:lightningcss-wasm@1.30.2": "1.30.2",
     "npm:markdown-it-attrs@4.3.1": "4.3.1_markdown-it@14.1.0",
@@ -368,6 +370,12 @@
         "undici-types"
       ]
     },
+    "@valibot/to-json-schema@1.4.0_valibot@1.2.0": {
+      "integrity": "sha512-xziHfrrB6al8uoUI876eAYU5x+nZFYifCssYnxS/P7JYe9LjzeKWnqwb8Yno7ulL84Gp0ZNj2GUR+3GXtU8CZQ==",
+      "dependencies": [
+        "valibot"
+      ]
+    },
     "argparse@2.0.1": {
       "integrity": "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="
     },
@@ -459,6 +467,9 @@
     },
     "universal-user-agent@7.0.3": {
       "integrity": "sha512-TmnEAEAsBJVZM/AADELsK76llnwcf9vMKuPz8JflO1frO8Lchitr0fNaN9d+Ap0BjKtqWqd/J17qeDnXh8CL2A=="
+    },
+    "valibot@1.2.0": {
+      "integrity": "sha512-mm1rxUsmOxzrwnX5arGS+U4T25RdvpPjPN4yR0u9pUBov9+zGVtO84tif1eY4r6zWxVxu3KzIyknJy3rxfRZZg=="
     }
   },
   "remote": {
@@ -747,6 +758,7 @@
       "npm:@octokit/rest@^22.0.1",
       "npm:@preact/signals@^2.5.1",
       "npm:@sinclair/typebox@~0.34.41",
+      "npm:@valibot/to-json-schema@^1.4.0",
       "npm:deepsignal@^1.6.0",
       "npm:preact@^10.28.0"
     ]
