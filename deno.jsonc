@@ -84,7 +84,11 @@
     },
     "test": {
       "description": "Run tests",
-      "command": "deno test -R --allow-net src/"
+      "command": "deno test -RW --allow-net --allow-env src/"
+    },
+    "test:e2e": {
+      "description": "Run E2E tests (requires network)",
+      "command": "deno test -RW --allow-net --allow-env src/scripts/autoupdate_test.ts"
     },
     "check": {
       "description": "Run all checks (validate + test)",

@@ -115,6 +115,8 @@ const getLatestTag = async (
     })
 
     if (!response.ok) {
+      // Always consume the response body to prevent leaks
+      await response.body?.cancel()
       console.error(`Failed to fetch tags: ${response.status}`)
       return null
     }
@@ -156,6 +158,8 @@ const getLatestCommit = async (
     })
 
     if (!response.ok) {
+      // Always consume the response body to prevent leaks
+      await response.body?.cancel()
       console.error(`Failed to fetch commit: ${response.status}`)
       return null
     }

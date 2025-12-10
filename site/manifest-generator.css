@@ -346,7 +346,7 @@
   overflow: auto;
   flex: 1;
   font: var(--font-code);
-  background: var(--code-background);
+  background: var(--color-background);
   border: none;
 }
 

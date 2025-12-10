@@ -1,15 +1,9 @@
-import { ModManifest } from "../mod.ts"
 import { stripColorCodes } from "../src/utils/color.ts"
 import { ModCard } from "./_includes/ModCard.tsx"
+import type { ModPageData } from "./_includes/types.ts"
 
 export const layout = "base.tsx"
 export const title = "Home"
-
-interface ModPageData {
-  url: string
-  title: string
-  manifest: ModManifest
-}
 
 export default ({ search }: Lume.Data) => {
   // Get all mods and show the 6 most recently updated

@@ -6,6 +6,9 @@ import metas from "lume/plugins/metas.ts"
 import sitemap from "lume/plugins/sitemap.ts"
 import esbuild from "lume/plugins/esbuild.ts"
 import relativeUrls from "lume/plugins/relative_urls.ts"
+import minifyHTML from "lume/plugins/minify_html.ts"
+import robots from "lume/plugins/robots.ts"
+import jsonLd from "lume/plugins/json_ld.ts"
 
 const site = lume({ src: "./site", dest: "./_site" })
 
@@ -94,6 +97,9 @@ site.process([".html"], (pages) => {
 site.use(jsx())
 site.use(metas())
 site.use(sitemap())
+site.use(robots())
+site.use(jsonLd())
+site.use(minifyHTML())
 
 site.copy("generated")
 site.copy("assets")
@@ -101,6 +107,7 @@ site.copy("styles.css")
 site.copy("manifest-generator.css")
 
 // Global data
+site.data("layout", "base.tsx")
 site.data("siteName", "BN Mod Registry")
 site.data(
   "siteDescription",

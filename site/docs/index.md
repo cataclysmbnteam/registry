@@ -12,7 +12,7 @@ title: Documentation
 <!--
 ## For Developers
 
-- [Registry API](/docs/api/) - Programmatic access to mod data
+- [Registry API](/api/) - Programmatic access to mod data
 - [Contributing](/docs/contributing/) - Help improve the registry -->
 
 ## Resources

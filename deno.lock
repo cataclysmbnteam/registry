@@ -10,6 +10,7 @@
     "jsr:@david/path@0.2": "0.2.0",
     "jsr:@david/which@~0.4.1": "0.4.1",
     "jsr:@deno/loader@0.3.9": "0.3.9",
+    "jsr:@minify-html/deno@0.18.1": "0.18.1",
     "jsr:@std/assert@^1.0.16": "1.0.16",
     "jsr:@std/bytes@^1.0.5": "1.0.6",
     "jsr:@std/cli@1.0.24": "1.0.24",
@@ -119,6 +120,9 @@
     },
     "@deno/loader@0.3.9": {
       "integrity": "703d44656f7da0fa4a4a7f8a5105b5b41320821286508c2967b4252a00a2506f"
+    },
+    "@minify-html/deno@0.18.1": {
+      "integrity": "1af76557adea9ee1e28759f653ec5a35e9c006e2abe73b65e4944aa821711ed1"
     },
     "@std/assert@1.0.16": {
       "integrity": "6a7272ed1eaa77defe76e5ff63ca705d9c495077e2d5fd0126d2b53fc5bd6532",
@@ -660,6 +664,7 @@
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/deps/jsonc.ts": "79f0eddc3c9e593310eb8e5918eb1506b1c7d7816e4ecb96894f634ecbe626ff",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/deps/lightningcss.ts": "9ae4e32c6b6854d5a2b955970a0f2143853511a329b275102423044b67c9c514",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/deps/markdown_it.ts": "24c1c0fd18c99b9067d9ff5d051f934cb7c3446e6afbad934f6268af8d1ceb4d",
+    "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/deps/minify_html.ts": "1bd91f0ad315edafb77b2e67eef2be028fca2d9d0d284afdad0b8d3ee3a547d7",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/deps/pagefind.ts": "59906c366815e02b4b42afc077261bd80d977aa633e504d10b5adb516009b1f5",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/deps/path.ts": "4f0c817d8570664560aa77e6e38184c95dc66b18fac9c2a83c6b719ef28f85ee",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/deps/remove-markdown.ts": "e304dcdd2c1042a1de5b2df53c9c8c39f4462307f95d13e4b2fa1ded26851013",
@@ -682,15 +687,18 @@
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/date.ts": "cbf280a28f8aef6f2c9ab9b5234875ab5994fe68e0f977798043e056dfc9a56f",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/esbuild.ts": "6f0a5684a7600b836b318d622ebbf77e4a3a7fa6f5ca366fddcea37871b5f770",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/json.ts": "5c49499e56b919ec848d4118ec97dd4fe0a323a6cc4c648dc45ab55297614c12",
+    "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/json_ld.ts": "a9643f94dd658a851ab664f712161899e2037fce39f30c167034016cf2142603",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/jsx.ts": "a12b2ca8614968a2a2ab13e59dd447488f9a8b505e688e77b15d7183cc85ce7e",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/lume_cms.ts": "1ac67122b15eb596793ad106bdec7faa4319d0535ebcc3041bc4e36f0179cbc0",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/markdown.ts": "7e82d897c1e35bf119dcd18b6aec7a6ba5aa06848897b34ff9cd161ec7c8757e",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/metas.ts": "1e5826aadd5856af0c28a34e2f5580c718aa6cee6e7d7c63835e7c22467dc310",
+    "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/minify_html.ts": "e532e50f8161136afdb9914091e29a1bb50f964255a6494328c188deb8490c32",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/modify_urls.ts": "ddead1740f1c38a692586065e4e770085c9697cd103ab8865c260841f16010d8",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/modules.ts": "4e177c0ffe972b9deef10db2bf0ae52b405418af4dbac03db9e7ffbd6a3ec6ae",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/pagefind.ts": "53658d938d16797bab13ca4cf844df48133d30aaf71d552e6988379e5e2f9580",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/paginate.ts": "6a1a9a24d0fabed2f722a6a6f29d98559219c69475685034181816e82d367f2e",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/relative_urls.ts": "3fd70d74cd051998e5ce8e4d97bd8f8a925c9098354ce66ca4f171f7ba2af91d",
+    "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/robots.ts": "8fe0e4aeba1b28d7f8e4810b1f8bc3f71e0fdb93b3108ebdcd4299e1ea66f18e",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/search.ts": "5acb5be828bbbd012fb9226cb97ec3e370d43d05aa44d16e7e7d50bab368b442",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/sitemap.ts": "bd6bcf783191ef60d364c0098b0c2f86d94c7cde7001beee6e8290b483f5944a",
     "https://cdn.jsdelivr.net/gh/lumeland/lume@3.1.2/plugins/source_maps.ts": "10afd5d8617003ed68db9895bc13e57d1742697fa55657e27efd535da6e52c34",

@@ -39,10 +39,10 @@ const DEFAULT_OPTIONS: Required<CheckOptions> = {
  * @param options - Check options
  * @returns Check result
  */
-export async function checkUrl(
+export const checkUrl = async (
   url: string,
   options: CheckOptions = {},
-): Promise<UrlCheckResult> {
+): Promise<UrlCheckResult> => {
   const opts = { ...DEFAULT_OPTIONS, ...options }
 
   for (let attempt = 0; attempt < opts.retries; attempt++) {
@@ -96,12 +96,10 @@ export async function checkUrl(
  * @param options - Check options
  * @returns Array of check results
  */
-export function checkUrls(
+export const checkUrls = (
   urls: string[],
   options: CheckOptions = {},
-): Promise<UrlCheckResult[]> {
-  return Promise.all(urls.map((url) => checkUrl(url, options)))
-}
+): Promise<UrlCheckResult[]> => Promise.all(urls.map((url) => checkUrl(url, options)))
 
 /**
  * Extract all URLs from a manifest that should be checked.
@@ -109,25 +107,14 @@ export function checkUrls(
  * @param manifest - The manifest object
  * @returns Array of URLs to check
  */
-export function extractManifestUrls(manifest: {
+export const extractManifestUrls = (manifest: {
   source?: { url?: string }
   icon_url?: string
   homepage?: string
-}): string[] {
-  const urls: string[] = []
+}): string[] =>
+  [
+    manifest.source?.url,
+    manifest.icon_url,
+  ].filter((url): url is string => url !== undefined)
 
-  if (manifest.source?.url) {
-    urls.push(manifest.source.url)
-  }
-  if (manifest.icon_url) {
-    urls.push(manifest.icon_url)
-  }
-  // Homepage is informational, not critical
-  // if (manifest.homepage) urls.push(manifest.homepage)
-
-  return urls
-}
-
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms))
-}
+const sleep = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms))

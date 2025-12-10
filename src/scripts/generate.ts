@@ -6,6 +6,7 @@
  */
 
 import { Command } from "@cliffy/command"
+import { sortBy } from "@std/collections"
 import * as YAML from "@std/yaml"
 import { walk } from "@std/fs"
 import { ModManifest } from "../schema/manifest.ts"
@@ -49,7 +50,7 @@ export const loadManifests = async (
  * Generate combined JSON index.
  */
 export const generateJsonIndex = (manifests: ModManifest[]): string => {
-  const sorted = [...manifests].sort((a, b) => a.display_name.localeCompare(b.display_name))
+  const sorted = sortBy(manifests, (m) => m.display_name)
   return JSON.stringify(sorted, null, 2)
 }
 
@@ -57,7 +58,7 @@ export const generateJsonIndex = (manifests: ModManifest[]): string => {
  * Generate Markdown table of mods.
  */
 export const generateMarkdownTable = (manifests: ModManifest[]): string => {
-  const sorted = [...manifests].sort((a, b) => a.display_name.localeCompare(b.display_name))
+  const sorted = sortBy(manifests, (m) => m.display_name)
 
   let buffer = `# Cataclysm: Bright Nights Mod Registry
 
@@ -80,29 +81,134 @@ This is an automatically generated list of mods in the registry.
 }
 
 /**
- * Generate all output files (JSON index and Markdown table).
+ * Generate OpenAPI 3.0 specification.
+ */
+export const generateOpenApiSpec = (): object => {
+  const modSchema = toJsonSchema(ModManifest, { typeMode: "input", errorMode: "ignore" })
+
+  return {
+    openapi: "3.0.3",
+    info: {
+      title: "BN Mod Registry API",
+      description:
+        "API for accessing Cataclysm: Bright Nights mod metadata. This is a static JSON API - all data is served from pre-generated files.",
+      version: "1.0.0",
+      license: {
+        name: "MIT",
+        url: "https://opensource.org/licenses/MIT",
+      },
+    },
+    servers: [
+      {
+        url: "https://cataclysmbnteam.github.io/registry",
+        description: "Production",
+      },
+    ],
+    paths: {
+      "/generated/mods.json": {
+        get: {
+          summary: "Get all mods",
+          description:
+            "Returns an array of all mod manifests in the registry, sorted alphabetically by display name.",
+          operationId: "getMods",
+          tags: ["Mods"],
+          responses: {
+            "200": {
+              description: "Successful response",
+              content: {
+                "application/json": {
+                  schema: {
+                    type: "array",
+                    items: modSchema,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      "/generated/mods/{mod_id}.json": {
+        get: {
+          summary: "Get a single mod",
+          description: "Returns the manifest for a specific mod by its ID.",
+          operationId: "getMod",
+          tags: ["Mods"],
+          parameters: [
+            {
+              name: "mod_id",
+              in: "path",
+              required: true,
+              description: "The unique identifier of the mod",
+              schema: {
+                type: "string",
+                pattern: "^[a-z0-9][a-z0-9_-]*$",
+              },
+            },
+          ],
+          responses: {
+            "200": {
+              description: "Successful response",
+              content: {
+                "application/json": {
+                  schema: modSchema,
+                },
+              },
+            },
+            "404": {
+              description: "Mod not found",
+            },
+          },
+        },
+      },
+    },
+    components: {
+      schemas: {
+        ModManifest: modSchema,
+      },
+    },
+  }
+}
+
+/**
+ * Generate all output files (JSON index, Markdown table, OpenAPI spec, and individual mod files).
  */
 export const generateAll = async (
   manifestDir: string,
   outputDir: string,
 ): Promise<void> => {
-  // Ensure output directory exists
+  // Ensure output directories exist
   await Deno.mkdir(outputDir, { recursive: true })
+  await Deno.mkdir(`${outputDir}/mods`, { recursive: true })
 
   console.log(`Loading manifests from ${manifestDir}/`)
   const manifests = await loadManifests(manifestDir)
   console.log(`Found ${manifests.length} manifests`)
 
+  // Generate individual mod JSON files
+  console.log(`Generating individual mod JSON files...`)
+  await Promise.all(
+    manifests.map((mod) =>
+      Deno.writeTextFile(
+        `${outputDir}/mods/${mod.id}.json`,
+        JSON.stringify(mod, null, 2),
+      )
+    ),
+  )
+
   await Promise.all([
-    await Deno.writeTextFile(`${outputDir}/mods.json`, generateJsonIndex(manifests)),
-    await Deno.writeTextFile(`${outputDir}/mods.md`, generateMarkdownTable(manifests)),
-    await Deno.writeTextFile(
+    Deno.writeTextFile(`${outputDir}/mods.json`, generateJsonIndex(manifests)),
+    Deno.writeTextFile(`${outputDir}/mods.md`, generateMarkdownTable(manifests)),
+    Deno.writeTextFile(
       `${outputDir}/mod_manifest.schema.json`,
       JSON.stringify(
         toJsonSchema(ModManifest, { typeMode: "input", errorMode: "ignore" }),
         null,
         2,
       ),
+    ),
+    Deno.writeTextFile(
+      `${outputDir}/openapi.json`,
+      JSON.stringify(generateOpenApiSpec(), null, 2),
     ),
   ])
 }

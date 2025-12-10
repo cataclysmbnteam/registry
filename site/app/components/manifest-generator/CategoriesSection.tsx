@@ -20,17 +20,16 @@ export const CategoriesSection = () => (
     <h3>Categories and Tags</h3>
     <div class="form-group">
       <label>Categories</label>
-      <div class="badge-group">
+      <div class="category-filters">
         {MOD_CATEGORIES.map((cat) => (
-          <span
-            key={cat}
-            class={`badge badge-selectable ${
-              store.categories.includes(cat) ? "badge-selected" : ""
-            }`}
-            onClick={() => toggleCategory(cat)}
-          >
+          <label class="category-checkbox" key={cat}>
+            <input
+              type="checkbox"
+              checked={store.categories.includes(cat)}
+              onChange={() => toggleCategory(cat)}
+            />
             {cat}
-          </span>
+          </label>
         ))}
       </div>
     </div>

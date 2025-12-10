@@ -38,6 +38,14 @@ export default (
         hamburger?.classList.toggle("open")
       }
     }
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('back-to-top');
+      if (btn) {
+        btn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
   `
 
   return (
@@ -79,8 +87,9 @@ export default (
             href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/styles/dark.min.css"
           />
         </head>
-        <body>
-          <div id={searchId}></div>
+        <body data-instant-intensity="viewport-all">
+          {/* Skip to main content link for accessibility */}
+          <a href="#main-content" class="skip-link">Skip to content</a>
           <nav data-pagefind-ignore>
             <ul>
               <li class="logo">
@@ -95,51 +104,63 @@ export default (
                     <a href="/docs/">Docs</a>
                   </li>
                   <li>
-                    <a href="/generated/mods.json">mods.json</a>
-                  </li>
-                  <li class="sticky">
-                    <a href="/docs/generator/" class="btn-add">Add Mod</a>
+                    <a href="/api/">API</a>
                   </li>
                 </ul>
               </li>
-              <li class="theme-toggle">
-                <button
-                  type="button"
-                  aria-label="Toggle dark/light theme"
-                  class="btn-theme"
-                  onclick="changeTheme()"
-                >
-                  {/* Half-moon icon (circle with half filled) */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
+              <div
+                style={{
+                  "margin-left": "auto",
+                  display: "flex",
+                  gap: "0.5rem",
+                  alignItems: "center",
+                }}
+              >
+                <li class="nav-search" id={searchId}></li>
+                <li class="btn-add-wrapper">
+                  <a href="/docs/generator/" class="btn-add">Add Mod</a>
+                </li>
+                <li class="theme-toggle">
+                  <button
+                    type="button"
+                    aria-label="Toggle dark/light theme"
+                    class="btn-theme"
+                    onclick="changeTheme()"
                   >
-                    <path
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 16"
+                      width="20"
+                      height="20"
                       fill="currentColor"
-                      fill-rule="evenodd"
-                      d="M10 0c5.523 0 10 4.477 10 10s-4.477 10-10 10S0 15.523 0 10 4.477 0 10 0Zm9 10a9 9 0 0 1-9 9V1a9 9 0 0 1 9 9Z"
-                    />
-                  </svg>
-                </button>
-              </li>
-              <li class="hamburger-wrapper">
-                <button
-                  type="button"
-                  aria-label="Toggle menu"
-                  class="hamburger"
-                  onclick="toggleMenu()"
-                >
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </button>
-              </li>
+                    >
+                      <path d="M14.53 10.53a7 7 0 0 1-9.058-9.058A7.003 7.003 0 0 0 8 15a7.002 7.002 0 0 0 6.53-4.47Z" />
+                    </svg>
+                  </button>
+                </li>
+                <li class="hamburger-wrapper">
+                  <button
+                    type="button"
+                    aria-label="Toggle menu"
+                    class="hamburger"
+                    onclick="toggleMenu()"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 16"
+                      width="24"
+                      height="24"
+                      fill="currentColor"
+                    >
+                      <path d="M1 2.75A.75.75 0 0 1 1.75 2h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 2.75Zm0 5A.75.75 0 0 1 1.75 7h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 7.75ZM1.75 12h12.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5Z" />
+                    </svg>
+                  </button>
+                </li>
+              </div>
             </ul>
           </nav>
 
-          <main data-pagefind-body={shouldIndex ? "" : undefined}>
+          <main id="main-content" data-pagefind-body={shouldIndex ? "" : undefined}>
             {children}
           </main>
 
@@ -157,6 +178,31 @@ export default (
               2025 © Cataclysm: Bright Nights Contributors
             </p>
           </footer>
+
+          {/* Back to Top Button */}
+          <button
+            id="back-to-top"
+            class="back-to-top"
+            type="button"
+            aria-label="Back to top"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              width="24"
+              height="24"
+              fill="currentColor"
+            >
+              <path d="M3.47 7.78a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0l4.25 4.25a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018L9 4.81v7.44a.75.75 0 0 1-1.5 0V4.81L4.53 7.78a.75.75 0 0 1-1.06 0Z" />
+            </svg>
+          </button>
+
+          {/* instant.page - preload pages on hover for instant navigation */}
+          <script
+            src="//instant.page/5.2.0"
+            type="module"
+            integrity="sha384-jnZyxPjiipYXnSU0ygqeac2q7CVYMbh84q0uHVRRxEtvFPiQYbXWUorga2aqZJ0z"
+          />
         </body>
       </html>
     </>
